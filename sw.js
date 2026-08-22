@@ -1,55 +1,108 @@
-const CACHE="calculadora-dialli-v5";
+const CACHE_NAME = "calculadora-dialli-v6";
 
-self.addEventListener("install",e=>
-  e.waitUntil(
-    caches.open(CACHE)
-    .then(c=>c.addAll([
-      "./",
-      "./index.html",
-      "./manifest.json"
-    ]))
-    .then(()=>self.skipWaiting())
-  )
-);
+const FILES = [
+  "./",
+  "./index.html",
+  "./manifest.json",
+  "./icon-180.png",
+  "./icon-192.png",
+  "./icon-512.png"
+];
 
-self.addEventListener("activate",e=>
-  e.waitUntil(
+self.addEventListener("install", function(event) {
+
+  event.waitUntil(
+
+    caches.open(CACHE_NAME)
+    .then(function(cache) {
+
+      return cache.addAll(FILES);
+
+    })
+    .then(function() {
+
+      return self.skipWaiting();
+
+    })
+
+  );
+
+});
+
+
+self.addEventListener("activate", function(event) {
+
+  event.waitUntil(
+
     caches.keys()
-    .then(keys=>
-      Promise.all(
+    .then(function(keys) {
+
+      return Promise.all(
+
         keys
-        .filter(x=>x!==CACHE)
-        .map(x=>caches.delete(x))
-      )
-    )
-    .then(()=>self.clients.claim())
-  )
-);
+        .filter(function(key) {
 
-self.addEventListener("fetch",e=>{
+          return key !== CACHE_NAME;
 
-  if(e.request.method!=="GET") return;
+        })
+        .map(function(key) {
 
-  e.respondWith(
+          return caches.delete(key);
 
-    fetch(e.request)
-    .then(r=>{
+        })
 
-      if(r.ok){
+      );
 
-        const copia=r.clone();
+    })
+    .then(function() {
 
-        caches.open(CACHE)
-        .then(c=>c.put(e.request,copia));
+      return self.clients.claim();
+
+    })
+
+  );
+
+});
+
+
+self.addEventListener("fetch", function(event) {
+
+  if(event.request.method !== "GET") {
+    return;
+  }
+
+  event.respondWith(
+
+    fetch(event.request)
+    .then(function(response) {
+
+      if(response.ok) {
+
+        const copy =
+          response.clone();
+
+        caches.open(CACHE_NAME)
+        .then(function(cache) {
+
+          cache.put(
+            event.request,
+            copy
+          );
+
+        });
 
       }
 
-      return r;
+      return response;
 
     })
-    .catch(()=>
-      caches.match(e.request)
-    )
+    .catch(function() {
+
+      return caches.match(
+        event.request
+      );
+
+    })
 
   );
 
