@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 
 <meta charset="UTF-8">
@@ -29,7 +30,8 @@ box-sizing:border-box;
 -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
 margin:0;
 padding:0;
 min-height:100%;
@@ -41,10 +43,21 @@ body{
 color:white;
 }
 
+button{
+font-family:Arial,Helvetica,sans-serif;
+}
+
+
+/* =========================
+   FUNDO
+========================= */
+
 .app{
 min-height:100vh;
 padding:10px 12px 20px;
-background:linear-gradient(
+
+background:
+linear-gradient(
 145deg,
 #012b17,
 #00642f,
@@ -71,19 +84,33 @@ margin-bottom:8px;
 }
 
 .modebar button{
-border:1px solid rgba(255,255,255,.35);
-background:rgba(255,255,255,.12);
+
+border:1px solid
+rgba(255,255,255,.35);
+
+background:
+rgba(255,255,255,.12);
+
 color:white;
+
 border-radius:10px;
-padding:8px 15px;
+
+padding:8px 16px;
+
 font-size:13px;
+
 font-weight:bold;
+
 cursor:pointer;
+
 }
 
 .modebar button.active{
+
 background:#ffd000;
+
 color:#06351f;
+
 }
 
 
@@ -92,35 +119,54 @@ color:#06351f;
 ========================= */
 
 .logo{
+
 display:block;
+
 width:min(94%,520px);
+
 margin:0 auto;
+
 }
 
 .logo svg{
+
 width:100%;
+
 height:auto;
+
 display:block;
+
 }
 
 
 /* =========================
-   TITULOS
+   TITULO
 ========================= */
 
 h1{
+
 text-align:center;
+
 color:white;
+
 font-size:32px;
+
 margin:7px 0;
+
 }
 
 .intro{
+
 text-align:center;
+
 color:white;
+
 font-size:15px;
+
 line-height:1.4;
+
 margin:0 10px 16px;
+
 }
 
 
@@ -129,11 +175,15 @@ margin:0 10px 16px;
 ========================= */
 
 .screen{
+
 display:none;
+
 }
 
 .screen.active{
+
 display:block;
+
 }
 
 
@@ -142,90 +192,153 @@ display:block;
 ========================= */
 
 .card{
+
 background:white;
+
 border-radius:24px;
+
 padding:18px;
+
 border:3px solid #15914b;
+
 }
 
 label{
+
 display:block;
+
 color:#075b2c;
+
 font-weight:bold;
+
 font-size:16px;
+
 margin-bottom:7px;
+
 }
 
 .input{
+
 display:flex;
+
 border:3px solid #15914b;
+
 border-radius:14px;
+
 overflow:hidden;
+
 }
 
 .input span{
+
 padding:14px;
+
 font-weight:bold;
+
 color:#075b2c;
+
 font-size:19px;
+
 }
 
 .input input{
+
 width:100%;
+
 height:55px;
+
 border:0;
+
 outline:0;
+
 font-size:21px;
+
 padding:0 12px;
+
 }
 
 .hint{
+
 font-size:12px;
+
 color:#68766f;
+
 margin:6px 0 18px;
+
 }
 
 .result{
+
 background:white;
+
 border-radius:22px;
+
 padding:17px;
+
 text-align:center;
+
 margin-top:12px;
+
 border:3px solid #38bf70;
+
 }
 
 .result h2{
+
 color:#145d35;
+
 font-size:18px;
+
 margin:0;
+
 }
 
 .num{
+
 font-size:33px;
+
 font-weight:900;
+
 color:#075b2c;
+
 margin:10px 0 5px;
+
 }
 
 .result p{
+
 color:#68756f;
+
 font-size:14px;
+
 margin:0;
+
 }
 
 .formulas{
+
 background:white;
+
 color:#123;
+
 border-radius:22px;
+
 padding:17px;
+
 margin-top:12px;
+
 font-size:14px;
+
 line-height:1.6;
+
 }
 
 .formulas b{
+
 color:#075b2c;
+
 font-size:17px;
+
 }
 
 
@@ -235,43 +348,43 @@ font-size:17px;
 
 .action,
 .install-button{
+
 width:100%;
+
 height:54px;
+
 margin-top:13px;
+
 border:0;
+
 border-radius:15px;
+
 font-weight:bold;
+
 font-size:16px;
+
 cursor:pointer;
+
 }
 
 .action{
+
 background:#075b2c;
+
 color:white;
+
 }
 
 .install-button{
+
 background:#15914b;
+
 color:white;
-box-shadow:0 4px 10px rgba(0,0,0,.2);
-}
 
+box-shadow:
+0 4px 10px
+rgba(0,0,0,.2);
 
-/* =========================
-   ASSINATURA
-========================= */
-
-.footer{
-text-align:center;
-color:white;
-padding:18px 0 5px;
-font-size:14px;
-}
-
-.footer strong{
-display:block;
-font-size:20px;
-margin-top:4px;
 }
 
 
@@ -280,30 +393,51 @@ margin-top:4px;
 ========================= */
 
 .calc-card{
+
 background:white;
+
 border-radius:24px;
+
 padding:16px;
+
 border:3px solid #15914b;
+
 }
 
 
-/* MEMÓRIA */
+/* =========================
+   MEMÓRIA
+========================= */
 
 .memory-row{
+
 display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:4px;
+
+grid-template-columns:
+repeat(6,1fr);
+
+gap:3px;
+
 margin-bottom:7px;
+
 }
 
 .memory-row button{
-border:0;
-background:transparent;
-color:#075b2c;
-font-size:13px;
-font-weight:bold;
+
 height:30px;
+
+border:0;
+
+background:transparent;
+
+color:#075b2c;
+
+font-size:12px;
+
+font-weight:bold;
+
 cursor:pointer;
+
 }
 
 
@@ -312,48 +446,71 @@ cursor:pointer;
 ========================= */
 
 .calc-display{
+
 width:100%;
-min-height:130px;
-border:0;
-border-radius:17px;
+
+min-height:135px;
+
 background:#06351f;
-color:white;
-padding:12px 16px;
+
+border-radius:18px;
+
+padding:13px 16px;
+
 margin-bottom:12px;
 
 display:flex;
+
 flex-direction:column;
+
 justify-content:flex-end;
 
 text-align:right;
+
 overflow:hidden;
+
 }
 
 
-/* CONTA EM CIMA */
+/* CONTA */
 
 .calc-expression{
-font-size:clamp(17px,4vw,25px);
-font-weight:500;
+
+font-size:
+clamp(17px,4vw,25px);
+
 color:#aebbb4;
+
 min-height:34px;
+
 white-space:nowrap;
+
 overflow:hidden;
+
 text-overflow:ellipsis;
+
 }
 
 
-/* RESULTADO EM BAIXO */
+/* RESULTADO */
 
 .calc-current{
-font-size:clamp(38px,11vw,58px);
+
+font-size:
+clamp(38px,11vw,58px);
+
 line-height:1.05;
+
 font-weight:900;
+
 color:white;
 
 white-space:nowrap;
+
 overflow:hidden;
+
 text-overflow:ellipsis;
+
 }
 
 
@@ -362,45 +519,106 @@ text-overflow:ellipsis;
 ========================= */
 
 .calc-grid{
+
 display:grid;
-grid-template-columns:repeat(4,1fr);
+
+grid-template-columns:
+repeat(4,1fr);
+
 gap:8px;
+
 }
 
 .calc-grid button{
+
 height:62px;
+
 border:0;
+
 border-radius:15px;
+
 background:#eaf2ed;
+
 color:#075b2c;
-font-size:22px;
+
+font-size:21px;
+
 font-weight:bold;
+
 cursor:pointer;
-transition:transform .08s,filter .08s;
+
+transition:
+transform .07s,
+filter .07s;
+
 }
 
 .calc-grid button:active{
-transform:scale(.96);
-filter:brightness(.92);
+
+transform:scale(.95);
+
+filter:brightness(.9);
+
 }
 
-.calc-grid button.op{
+.calc-grid .op{
+
 background:#15914b;
+
 color:white;
+
 }
 
-.calc-grid button.eq{
+.calc-grid .equal{
+
 background:#ffd000;
+
 color:#06351f;
+
 }
 
-.calc-grid button.special{
+.calc-grid .special{
+
 background:#dfe9e3;
+
 color:#075b2c;
+
 }
 
-.calc-grid button.zero{
+.calc-grid .zero{
+
 grid-column:span 2;
+
+}
+
+
+/* =========================
+   ASSINATURA
+========================= */
+
+.footer{
+
+text-align:center;
+
+color:white;
+
+padding:
+20px 0 5px;
+
+font-size:14px;
+
+line-height:1.5;
+
+}
+
+.footer strong{
+
+display:block;
+
+font-size:20px;
+
+margin-top:2px;
+
 }
 
 
@@ -411,24 +629,29 @@ grid-column:span 2;
 @media(max-width:600px){
 
 h1{
+
 font-size:29px;
+
 }
 
 .app{
+
 padding-top:8px;
+
 }
 
 .calc-grid{
-gap:7px;
+
+gap:6px;
+
 }
 
 .calc-grid button{
-height:58px;
-font-size:21px;
-}
 
-.memory-row button{
-font-size:12px;
+height:57px;
+
+font-size:20px;
+
 }
 
 }
@@ -441,20 +664,29 @@ font-size:12px;
 @media(max-width:380px){
 
 .calc-grid{
+
 gap:5px;
+
 }
 
 .calc-grid button{
-height:53px;
-font-size:19px;
+
+height:52px;
+
+font-size:18px;
+
 }
 
 .calc-expression{
-font-size:16px;
+
+font-size:15px;
+
 }
 
 .calc-current{
-font-size:36px;
+
+font-size:35px;
+
 }
 
 }
@@ -467,31 +699,42 @@ font-size:36px;
 @media(min-width:800px){
 
 .calc-grid button{
+
 height:70px;
+
 font-size:24px;
+
 }
 
 .calc-display{
-min-height:145px;
+
+min-height:150px;
+
 }
 
 .calc-current{
-font-size:58px;
+
+font-size:60px;
+
 }
 
 .calc-expression{
-font-size:24px;
+
+font-size:25px;
+
 }
 
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 <div class="app">
+
 <div class="box">
 
 
@@ -510,7 +753,7 @@ MARGEM
 </button>
 
 <button
-id="tabCalc">
+id="tabCalculadora">
 
 CALCULADORA
 
@@ -525,7 +768,8 @@ CALCULADORA
 
 <div class="logo">
 
-<svg viewBox="0 0 700 390">
+<svg
+viewBox="0 0 700 390">
 
 <path
 d="M75 185C110 80 270 30 440 55C555 70 630 120 650 190C610 105 485 80 370 88C240 95 135 130 75 185Z"
@@ -579,22 +823,27 @@ fill="white">
 </div>
 
 
-<!-- =========================
+<!-- =====================================================
      MARGEM
-========================= -->
+===================================================== -->
 
 <section
 id="margem"
 class="screen active">
 
+
 <h1>
 
 CALCULADORA
+
 <span style="color:#ffd000">
+
 DIALLI
+
 </span>
 
 </h1>
+
 
 <p class="intro">
 
@@ -607,13 +856,22 @@ lucro, margem e markup.
 
 <div class="card">
 
+
 <label>
+
 CUSTO DO PRODUTO
+
 </label>
+
 
 <div class="input">
 
-<span>R$</span>
+<span>
+
+R$
+
+</span>
+
 
 <input
 id="custo"
@@ -622,18 +880,29 @@ placeholder="Digite o custo">
 
 </div>
 
+
 <div class="hint">
+
 Ex.: 6,90
+
 </div>
 
 
 <label>
+
 PREÇO DE VENDA / OFERTA
+
 </label>
+
 
 <div class="input">
 
-<span>R$</span>
+<span>
+
+R$
+
+</span>
+
 
 <input
 id="venda"
@@ -642,9 +911,13 @@ placeholder="Digite o preço">
 
 </div>
 
+
 <div class="hint">
+
 Ex.: 10,00
+
 </div>
+
 
 </div>
 
@@ -652,17 +925,23 @@ Ex.: 10,00
 <div class="result">
 
 <h2>
+
 PREÇO DE VENDA
+
 </h2>
 
 <div
-class="num"
-id="rVenda">
+id="rVenda"
+class="num">
+
 —
+
 </div>
 
 <p>
+
 Preço informado
+
 </p>
 
 </div>
@@ -671,17 +950,23 @@ Preço informado
 <div class="result">
 
 <h2>
+
 LUCRO BRUTO
+
 </h2>
 
 <div
-class="num"
-id="rLucro">
+id="rLucro"
+class="num">
+
 —
+
 </div>
 
 <p>
+
 Venda − custo
+
 </p>
 
 </div>
@@ -690,17 +975,23 @@ Venda − custo
 <div class="result">
 
 <h2>
+
 MARGEM REAL
+
 </h2>
 
 <div
-class="num"
-id="rMargem">
+id="rMargem"
+class="num">
+
 —
+
 </div>
 
 <p>
+
 Lucro ÷ venda × 100
+
 </p>
 
 </div>
@@ -709,17 +1000,23 @@ Lucro ÷ venda × 100
 <div class="result">
 
 <h2>
+
 MARKUP
+
 </h2>
 
 <div
-class="num"
-id="rMarkup">
+id="rMarkup"
+class="num">
+
 —
+
 </div>
 
 <p>
+
 Venda ÷ custo
+
 </p>
 
 </div>
@@ -727,7 +1024,11 @@ Venda ÷ custo
 
 <div class="formulas">
 
-<b>FÓRMULAS</b>
+<b>
+
+FÓRMULAS
+
+</b>
 
 <br>
 
@@ -748,32 +1049,38 @@ Preço de Venda ÷ Custo
 
 
 <button
-class="action"
-id="limpar">
+id="limparMargem"
+class="action">
 
 LIMPAR TUDO
 
 </button>
 
+
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      CALCULADORA
-========================= -->
+===================================================== -->
 
 <section
 id="calculadora"
 class="screen">
 
+
 <h1>
 
 CALCULADORA
+
 <span style="color:#ffd000">
+
 DIALLI
+
 </span>
 
 </h1>
+
 
 <p class="intro">
 
@@ -842,133 +1149,199 @@ class="calc-current">
 
 <button
 class="special"
-data-v="%">
+data-action="percent">
+
 %
+
 </button>
+
 
 <button
 class="special"
-data-v="CE">
+data-action="ce">
+
 CE
+
 </button>
+
 
 <button
 class="special"
-data-v="C">
+data-action="clear">
+
 C
+
 </button>
+
 
 <button
 class="special"
-data-v="back">
+data-action="back">
+
 ⌫
+
 </button>
 
 
 <button
 class="special"
-data-v="inverse">
+data-action="inverse">
+
 1/x
+
 </button>
+
 
 <button
 class="special"
-data-v="square">
+data-action="square">
+
 x²
+
 </button>
+
 
 <button
 class="special"
-data-v="sqrt">
+data-action="sqrt">
+
 √x
+
 </button>
+
 
 <button
 class="op"
-data-v="/">
+data-op="/">
+
 ÷
+
 </button>
 
 
-<button data-v="7">
+<button data-number="7">
+
 7
+
 </button>
 
-<button data-v="8">
+
+<button data-number="8">
+
 8
+
 </button>
 
-<button data-v="9">
+
+<button data-number="9">
+
 9
+
 </button>
+
 
 <button
 class="op"
-data-v="*">
+data-op="*">
+
 ×
+
 </button>
 
 
-<button data-v="4">
+<button data-number="4">
+
 4
+
 </button>
 
-<button data-v="5">
+
+<button data-number="5">
+
 5
+
 </button>
 
-<button data-v="6">
+
+<button data-number="6">
+
 6
+
 </button>
+
 
 <button
 class="op"
-data-v="-">
+data-op="-">
+
 −
+
 </button>
 
 
-<button data-v="1">
+<button data-number="1">
+
 1
+
 </button>
 
-<button data-v="2">
+
+<button data-number="2">
+
 2
+
 </button>
 
-<button data-v="3">
+
+<button data-number="3">
+
 3
+
 </button>
+
 
 <button
 class="op"
-data-v="+">
+data-op="+">
+
 +
+
 </button>
 
 
 <button
 class="special"
-data-v="sign">
+data-action="sign">
+
 +/−
+
 </button>
+
 
 <button
 class="zero"
-data-v="0">
+data-number="0">
+
 0
+
 </button>
+
 
 <button
 class="special"
-data-v=",">
+data-action="decimal">
+
 ,
+
 </button>
 
+
 <button
-class="eq"
-data-v="=">
+class="equal"
+data-action="equals">
+
 =
+
 </button>
 
 
@@ -979,9 +1352,9 @@ data-v="=">
 </section>
 
 
-<!-- =========================
+<!-- =====================================================
      INSTALAR
-========================= -->
+===================================================== -->
 
 <button
 id="installButton"
@@ -992,107 +1365,149 @@ class="install-button">
 </button>
 
 
-<!-- =========================
+<!-- =====================================================
      ASSINATURA
-========================= -->
+===================================================== -->
 
 <div class="footer">
 
-Desenvolvido por
+Criado e desenvolvido por
 
 <strong>
-João Siena
+
+João Siena.
+
 </strong>
 
 </div>
 
 
 </div>
+
 </div>
 
 
 <script>
 
-/* =================================================
+/* ========================================================
    MARGEM
-================================================= */
+======================================================== */
 
-function parseNumber(value){
+const custoInput =
+document.getElementById("custo");
 
-let s=String(value||"")
-.trim()
-.replace(/\s/g,"");
+const vendaInput =
+document.getElementById("venda");
 
-if(!s)
+
+function lerNumeroBR(valor){
+
+valor =
+String(valor || "")
+.trim();
+
+
+if(!valor)
 return null;
 
-if(
-s.includes(",") &&
-s.includes(".")
-){
+
+/*
+   Aceita:
+
+   1000
+   1.000
+   1.000,50
+   1000,50
+*/
+
+valor =
+valor.replace(/\s/g,"");
+
 
 if(
-s.lastIndexOf(",") >
-s.lastIndexOf(".")
+valor.includes(".") &&
+valor.includes(",")
 ){
 
-s=s
-.replace(/\./g,"")
+valor =
+valor.replace(/\./g,"")
 .replace(",", ".");
-
-}else{
-
-s=s.replace(/,/g,"");
-
-}
 
 }
 
 else if(
-s.includes(",")
+valor.includes(",")
 ){
 
-s=s.replace(",", ".");
+valor =
+valor.replace(",", ".");
 
 }
 
-let n=Number(s);
+else{
 
-return Number.isFinite(n)
-? n
-: null;
+/*
+   Se for apenas ponto,
+   entendemos como decimal.
+   A calculadora de margem
+   aceita normalmente valores
+   digitados no formato comum.
+*/
+
+let partes =
+valor.split(".");
+
+if(partes.length > 2){
+
+valor =
+valor.replace(/\./g,"");
+
+}
 
 }
 
 
-function money(value){
+const numero =
+Number(valor);
 
-return value.toLocaleString(
+
+return Number.isFinite(numero)
+?numero
+:null;
+
+}
+
+
+function dinheiro(numero){
+
+return new Intl.NumberFormat(
 "pt-BR",
 {
 style:"currency",
 currency:"BRL"
 }
-);
+).format(numero);
 
 }
 
 
-function calcMargin(){
+function calcularMargem(){
 
-let custo=parseNumber(
-document.getElementById("custo").value
+const custo =
+lerNumeroBR(
+custoInput.value
 );
 
-let venda=parseNumber(
-document.getElementById("venda").value
+const venda =
+lerNumeroBR(
+vendaInput.value
 );
 
 
 if(
-custo===null ||
-venda===null ||
-custo<=0
+custo === null ||
+venda === null ||
+custo <= 0
 ){
 
 document.getElementById("rVenda")
@@ -1112,316 +1527,228 @@ return;
 }
 
 
-let lucro=venda-custo;
+const lucro =
+venda-custo;
 
-let margem=(lucro/venda)*100;
 
-let markup=venda/custo;
+const margem =
+(venda !== 0)
+?
+(lucro/venda)*100
+:
+0;
+
+
+const markup =
+venda/custo;
 
 
 document.getElementById("rVenda")
-.textContent=money(venda);
+.textContent=
+dinheiro(venda);
+
 
 document.getElementById("rLucro")
-.textContent=money(lucro);
+.textContent=
+dinheiro(lucro);
+
 
 document.getElementById("rMargem")
 .textContent=
-margem.toLocaleString(
+new Intl.NumberFormat(
 "pt-BR",
 {
 minimumFractionDigits:2,
 maximumFractionDigits:2
 }
-)+"%";
+).format(margem)
++"%";
+
 
 document.getElementById("rMarkup")
 .textContent=
-markup.toLocaleString(
+new Intl.NumberFormat(
 "pt-BR",
 {
 minimumFractionDigits:2,
 maximumFractionDigits:2
 }
-)+"x";
+).format(markup)
++"x";
 
 }
 
 
-document
-.getElementById("custo")
-.addEventListener(
+custoInput.addEventListener(
 "input",
-calcMargin
+calcularMargem
 );
 
 
-document
-.getElementById("venda")
-.addEventListener(
+vendaInput.addEventListener(
 "input",
-calcMargin
+calcularMargem
 );
 
 
 document
-.getElementById("limpar")
-.addEventListener(
-"click",
-function(){
+.getElementById("limparMargem")
+.onclick=function(){
 
-document.getElementById("custo")
-.value="";
+custoInput.value="";
 
-document.getElementById("venda")
-.value="";
+vendaInput.value="";
 
-calcMargin();
+calcularMargem();
 
-}
-);
+};
 
 
-/* =================================================
+/* ========================================================
    ABAS
-================================================= */
+======================================================== */
 
-function abrirMargem(){
+const margemScreen =
+document.getElementById("margem");
 
-document
-.getElementById("margem")
-.classList.add("active");
+const calculadoraScreen =
+document.getElementById("calculadora");
 
-document
-.getElementById("calculadora")
-.classList.remove("active");
+const tabMargem =
+document.getElementById("tabMargem");
 
-document
-.getElementById("tabMargem")
-.classList.add("active");
-
-document
-.getElementById("tabCalc")
-.classList.remove("active");
-
-}
+const tabCalculadora =
+document.getElementById("tabCalculadora");
 
 
-function abrirCalculadora(){
+tabMargem.onclick=function(){
 
-document
-.getElementById("margem")
-.classList.remove("active");
+margemScreen.classList.add("active");
 
-document
-.getElementById("calculadora")
-.classList.add("active");
+calculadoraScreen.classList.remove("active");
 
-document
-.getElementById("tabMargem")
-.classList.remove("active");
+tabMargem.classList.add("active");
 
-document
-.getElementById("tabCalc")
-.classList.add("active");
+tabCalculadora.classList.remove("active");
 
-}
+};
 
 
-document
-.getElementById("tabMargem")
-.onclick=abrirMargem;
+tabCalculadora.onclick=function(){
+
+margemScreen.classList.remove("active");
+
+calculadoraScreen.classList.add("active");
+
+tabMargem.classList.remove("active");
+
+tabCalculadora.classList.add("active");
+
+};
 
 
-document
-.getElementById("tabCalc")
-.onclick=abrirCalculadora;
-
-
-/* =================================================
+/* ========================================================
    CALCULADORA
-================================================= */
-
-let tokens=[];
-
-let current="0";
-
-let justCalculated=false;
-
-let memory=0;
+======================================================== */
 
 
-const expressionEl=
-document.getElementById(
-"calcExpression"
-);
+/*
+   A calculadora trabalha internamente
+   com números reais e usa prioridade
+   matemática:
+
+   10 + 20 × 2
+
+   = 50
+
+   e não 60.
+*/
 
 
-const currentEl=
-document.getElementById(
-"calcCurrent"
-);
+let expression = [];
+
+let current = "0";
+
+let waitingForNumber = false;
+
+let justCalculated = false;
+
+let lastOperator = null;
+
+let memory = 0;
 
 
-/* =================================================
-   FORMATAÇÃO BRASILEIRA
-================================================= */
-
-function formatBrazilian(value){
-
-if(
-value===null ||
-value===undefined ||
-value===""
-){
-
-return "0";
-
-}
+/* ========================================================
+   FORMATAÇÃO
+======================================================== */
 
 
-let str=String(value);
-
-let negative=
-str.startsWith("-");
-
-
-if(negative){
-
-str=str.substring(1);
-
-}
-
-
-let parts=str.split(".");
-
-let integer=parts[0]||"0";
-
-let decimal=
-parts.length>1
-?parts.slice(1).join("")
-:null;
-
-
-/* PONTO DE MILHAR */
-
-integer=
-Number(integer)
-.toLocaleString(
+const formatter =
+new Intl.NumberFormat(
 "pt-BR",
 {
 useGrouping:true,
-maximumFractionDigits:0
+maximumFractionDigits:12
 }
 );
 
 
-let result=integer;
+function formatNumber(value){
 
-
-/* VÍRGULA DECIMAL */
-
-if(decimal!==null){
-
-result+=
-","+decimal;
-
-}
-
-
-if(negative){
-
-result="−"+result;
-
-}
-
-
-return result;
-
-}
-
-
-/* =================================================
-   RESULTADO
-================================================= */
-
-function formatResult(value){
-
-let number=Number(value);
-
-
-if(!Number.isFinite(number)){
-
+if(
+value === "Erro"
+)
 return "Erro";
 
-}
+
+let number =
+Number(value);
 
 
 if(
-Math.abs(number)<0.000000000001
-){
+!Number.isFinite(number)
+)
+return "Erro";
 
+
+if(
+Math.abs(number) < 1e-12
+)
 number=0;
 
-}
 
-
-number=
-Math.round(
-(number+Number.EPSILON)
-*1000000000000
-)/1000000000000;
-
-
-return formatBrazilian(
-String(number)
-);
+return formatter.format(number);
 
 }
 
-
-/* =================================================
-   OPERADORES
-================================================= */
-
-function isOperator(value){
-
-return[
-"+",
-"-",
-"*",
-"/"
-].includes(value);
-
-}
-
-
-/* =================================================
-   CONTA NO VISOR
-================================================= */
 
 function formatExpression(){
 
-return tokens
+return expression
 .map(function(item){
 
-if(!isOperator(item)){
+if(
+item === "+"
+)
+return "+";
 
-return formatBrazilian(item);
-
-}
-
-
-if(item==="*")
-return "×";
-
-if(item==="/")
-return "÷";
-
-if(item==="-")
+if(
+item === "-"
+)
 return "−";
 
-return item;
+if(
+item === "*"
+)
+return "×";
+
+if(
+item === "/"
+)
+return "÷";
+
+
+return formatNumber(item);
 
 })
 .join(" ");
@@ -1429,280 +1756,162 @@ return item;
 }
 
 
-/* =================================================
-   VISOR
-================================================= */
+function renderCalculator(){
 
-function render(){
-
-expressionEl.textContent=
+document
+.getElementById("calcExpression")
+.textContent=
 formatExpression();
 
-currentEl.textContent=
-formatBrazilian(current);
+
+document
+.getElementById("calcCurrent")
+.textContent=
+formatNumber(current);
 
 }
 
 
-/* =================================================
-   CÁLCULO
-================================================= */
+/* ========================================================
+   LIMPAR
+======================================================== */
 
-function calculateTokens(list){
+function clearCalculator(){
 
-if(list.length===0)
-return null;
+expression=[];
+
+current="0";
+
+waitingForNumber=false;
+
+justCalculated=false;
+
+lastOperator=null;
+
+renderCalculator();
+
+}
 
 
-let values=[];
+function clearEntry(){
 
-let operators=[];
+current="0";
+
+waitingForNumber=false;
+
+renderCalculator();
+
+}
 
 
-for(
-let i=0;
-i<list.length;
-i++
+/* ========================================================
+   NÚMEROS
+======================================================== */
+
+function inputNumber(number){
+
+if(
+current==="Erro"
 ){
 
-let item=list[i];
-
-
-if(isOperator(item)){
-
-operators.push(item);
-
-}else{
-
-let number=Number(item);
-
-
-if(!Number.isFinite(number))
-return null;
-
-
-values.push(number);
+clearCalculator();
 
 }
-
-}
-
-
-/* MULTIPLICAÇÃO E DIVISÃO */
-
-let newValues=[
-values[0]
-];
-
-let newOperators=[];
-
-
-for(
-let i=0;
-i<operators.length;
-i++
-){
-
-let operator=
-operators[i];
 
 
 if(
-operator==="*" ||
-operator==="/"
+waitingForNumber ||
+justCalculated
 ){
-
-let a=
-newValues[
-newValues.length-1
-];
-
-let b=
-values[i+1];
-
-let result;
-
-
-if(operator==="*"){
-
-result=a*b;
-
-}else{
-
-if(b===0)
-return null;
-
-result=a/b;
-
-}
-
-
-if(!Number.isFinite(result))
-return null;
-
-
-result=
-Math.round(
-(result+Number.EPSILON)
-*1000000000000
-)/1000000000000;
-
-
-newValues[
-newValues.length-1
-]=result;
-
-}else{
-
-newOperators.push(
-operator
-);
-
-newValues.push(
-values[i+1]
-);
-
-}
-
-}
-
-
-/* SOMA E SUBTRAÇÃO */
-
-let result=
-newValues[0];
-
-
-for(
-let i=0;
-i<newOperators.length;
-i++
-){
-
-if(newOperators[i]==="+"){
-
-result+=
-newValues[i+1];
-
-}
-
-
-if(newOperators[i]==="-"){
-
-result-=
-newValues[i+1];
-
-}
-
-}
-
-
-if(!Number.isFinite(result))
-return null;
-
-
-return Math.round(
-(result+Number.EPSILON)
-*1000000000000
-)/1000000000000;
-
-}
-
-
-/* =================================================
-   DIGITAR
-================================================= */
-
-function enterNumber(number){
-
-if(current==="Erro"){
-
-tokens=[];
 
 current="0";
 
-}
-
-
-if(justCalculated){
-
-tokens=[];
-
-current="0";
+waitingForNumber=false;
 
 justCalculated=false;
 
 }
 
 
-if(current==="0"){
+if(
+current==="0"
+){
 
 current=number;
 
 }else{
 
-current+=number;
+current += number;
 
 }
 
 
-render();
+renderCalculator();
 
 }
 
 
-/* =================================================
+/* ========================================================
    DECIMAL
-================================================= */
+======================================================== */
 
-function enterDecimal(){
+function inputDecimal(){
 
-if(current==="Erro"){
+if(
+current==="Erro"
+){
 
-tokens=[];
-
-current="0";
+clearCalculator();
 
 }
 
 
-if(justCalculated){
-
-tokens=[];
+if(
+waitingForNumber ||
+justCalculated
+){
 
 current="0";
+
+waitingForNumber=false;
 
 justCalculated=false;
 
 }
 
 
-if(!current.includes(".")){
+if(
+!current.includes(".")
+){
 
 current+=".";
 
 }
 
 
-render();
+renderCalculator();
 
 }
 
 
-/* =================================================
+/* ========================================================
    OPERADOR
-================================================= */
+======================================================== */
 
-function enterOperator(operator){
+function inputOperator(operator){
 
-if(current==="Erro")
+if(
+current==="Erro"
+)
 return;
 
 
-if(justCalculated){
+if(
+justCalculated
+){
 
-tokens=[
-String(Number(current))
+expression=[
+current
 ];
 
 justCalculated=false;
@@ -1710,61 +1919,77 @@ justCalculated=false;
 }
 
 
-if(tokens.length===0){
+if(
+!waitingForNumber
+){
 
-tokens.push(current);
+expression.push(
+current
+);
 
 }
 
-else if(
-isOperator(
-tokens[tokens.length-1]
+
+if(
+expression.length>0 &&
+["+","-","*","/"]
+.includes(
+expression[
+expression.length-1
+]
 )
 ){
 
-tokens[
-tokens.length-1
-]=operator;
+expression[
+expression.length-1
+]=
+operator;
 
-}
+}else{
 
-else{
-
-tokens.push(current);
-
-tokens.push(operator);
+expression.push(
+operator
+);
 
 }
 
 
 current="0";
 
-render();
+waitingForNumber=true;
+
+lastOperator=operator;
+
+renderCalculator();
 
 }
 
 
-/* =================================================
-   IGUAL
-================================================= */
-
-function equals(){
-
-if(current==="Erro")
-return;
+/* ========================================================
+   AVALIAÇÃO DA EXPRESSÃO
+======================================================== */
 
 
-if(tokens.length===0){
+function evaluateExpression(){
 
-render();
+if(
+expression.length===0
+)
+return null;
 
-return;
 
-}
+/*
+   Se terminou em operador,
+   remove o operador.
+*/
+
+let tokens =
+expression.slice();
 
 
 if(
-isOperator(
+["+","-","*","/"]
+.includes(
 tokens[tokens.length-1]
 )
 ){
@@ -1777,21 +2002,214 @@ tokens.pop();
 tokens.push(current);
 
 
+/*
+   Converte para estrutura
+*/
+
+let values=[];
+
+let operators=[];
+
+
+for(
+let i=0;
+i<tokens.length;
+i++
+){
+
+let token=
+tokens[i];
+
+
+if(
+["+","-","*","/"]
+.includes(token)
+){
+
+operators.push(token);
+
+}else{
+
+let value=
+Number(token);
+
+
+if(
+!Number.isFinite(value)
+)
+return null;
+
+
+values.push(value);
+
+}
+
+}
+
+
+if(
+values.length===0
+)
+return null;
+
+
+/*
+   Primeiro multiplicação/divisão
+*/
+
+let v=[
+values[0]
+];
+
+let o=[];
+
+
+for(
+let i=0;
+i<operators.length;
+i++
+){
+
+let operator=
+operators[i];
+
+let next=
+values[i+1];
+
+
+if(
+operator==="*" ||
+operator==="/"
+){
+
+let previous=
+v[v.length-1];
+
+let result;
+
+
+if(
+operator==="*"
+){
+
+result=
+previous*next;
+
+}else{
+
+if(next===0)
+return null;
+
+result=
+previous/next;
+
+}
+
+
+if(
+!Number.isFinite(result)
+)
+return null;
+
+
+v[v.length-1]=
+result;
+
+}else{
+
+o.push(operator);
+
+v.push(next);
+
+}
+
+}
+
+
+/*
+   Soma/subtração
+*/
+
 let result=
-calculateTokens(tokens);
+v[0];
 
 
-if(result===null){
+for(
+let i=0;
+i<o.length;
+i++
+){
 
-current="Erro";
+if(
+o[i]==="+"
+){
 
-justCalculated=true;
+result+=
+v[i+1];
 
-render();
+}else{
+
+result-=
+v[i+1];
+
+}
+
+}
+
+
+if(
+!Number.isFinite(result)
+)
+return null;
+
+
+/*
+   Reduz erros de ponto flutuante.
+*/
+
+return Math.round(
+(result+Number.EPSILON)
+*1000000000000
+)/1000000000000;
+
+}
+
+
+/* ========================================================
+   IGUAL
+======================================================== */
+
+function calculate(){
+
+if(
+current==="Erro"
+)
+return;
+
+
+let result=
+evaluateExpression();
+
+
+if(
+result===null
+){
 
 return;
 
 }
+
+
+/*
+   A expressão permanece
+   no topo do visor.
+
+   Exemplo:
+
+   1.500.000 − 250.000
+
+   1.250.000
+*/
 
 
 current=
@@ -1799,62 +2217,46 @@ String(result);
 
 justCalculated=true;
 
-render();
+waitingForNumber=false;
+
+lastOperator=null;
+
+renderCalculator();
 
 }
 
 
-/* =================================================
-   LIMPAR
-================================================= */
-
-function clearAll(){
-
-tokens=[];
-
-current="0";
-
-justCalculated=false;
-
-render();
-
-}
-
-
-function clearEntry(){
-
-current="0";
-
-render();
-
-}
-
-
-/* =================================================
-   APAGAR
-================================================= */
+/* ========================================================
+   BACKSPACE
+======================================================== */
 
 function backspace(){
 
-if(current==="Erro"){
+if(
+current==="Erro"
+){
 
-clearAll();
-
-return;
-
-}
-
-
-if(justCalculated){
-
-clearAll();
+clearCalculator();
 
 return;
 
 }
 
 
-if(current.length>1){
+if(
+justCalculated
+){
+
+clearCalculator();
+
+return;
+
+}
+
+
+if(
+current.length>1
+){
 
 current=
 current.slice(0,-1);
@@ -1866,68 +2268,76 @@ current="0";
 }
 
 
-render();
+renderCalculator();
 
 }
 
 
-/* =================================================
+/* ========================================================
    PORCENTAGEM
-================================================= */
+======================================================== */
 
-function percentage(){
+function percent(){
+
+if(
+current==="Erro"
+)
+return;
+
 
 let value=
 Number(current);
 
 
-if(!Number.isFinite(value))
+if(
+!Number.isFinite(value)
+)
 return;
 
 
-if(tokens.length>0){
+/*
+   Em:
 
-let lastOperator=
-tokens[tokens.length-1];
+   200 + 10%
 
+   transforma 10% em 20.
 
-let base=null;
+   Em:
 
+   200 × 10%
 
-for(
-let i=tokens.length-1;
-i>=0;
-i--
+   transforma em 0,10.
+*/
+
+if(
+expression.length>0
 ){
 
-if(!isOperator(tokens[i])){
-
-base=
-Number(tokens[i]);
-
-break;
-
-}
-
-}
+let operator=
+expression[
+expression.length-1
+];
 
 
 if(
-base!==null &&
-(
-lastOperator==="+" ||
-lastOperator==="-"
-)
+operator==="+" ||
+operator==="-"
+){
+
+let base=
+Number(
+expression[
+expression.length-2
+]
+);
+
+if(
+Number.isFinite(base)
 ){
 
 value=
 base*value/100;
 
-}else{
-
-value=
-value/100;
-
 }
 
 }else{
@@ -1937,25 +2347,25 @@ value/100;
 
 }
 
+}else{
 
 value=
-Math.round(
-(value+Number.EPSILON)
-*1000000000000
-)/1000000000000;
+value/100;
+
+}
 
 
 current=
 String(value);
 
-render();
+renderCalculator();
 
 }
 
 
-/* =================================================
+/* ========================================================
    +/-
-================================================= */
+======================================================== */
 
 function toggleSign(){
 
@@ -1966,55 +2376,62 @@ current==="Erro"
 return;
 
 
-if(current.startsWith("-")){
+if(
+current.startsWith("-")
+){
 
 current=
 current.substring(1);
 
 }else{
 
-current="-"+current;
+current=
+"-"+current;
 
 }
 
 
-render();
+renderCalculator();
 
 }
 
 
-/* =================================================
-   1/X
-================================================= */
+/* ========================================================
+   RAIZ
+======================================================== */
 
-function inverse(){
+function squareRoot(){
 
 let value=
 Number(current);
 
 
-if(value===0){
+if(
+value<0
+){
 
 current="Erro";
 
 }else{
 
 current=
-String(1/value);
+String(
+Math.sqrt(value)
+);
 
 }
 
 
 justCalculated=true;
 
-render();
+renderCalculator();
 
 }
 
 
-/* =================================================
-   X²
-================================================= */
+/* ========================================================
+   QUADRADO
+======================================================== */
 
 function square(){
 
@@ -2023,47 +2440,53 @@ Number(current);
 
 
 current=
-String(value*value);
+String(
+value*value
+);
 
 justCalculated=true;
 
-render();
+renderCalculator();
 
 }
 
 
-/* =================================================
-   RAIZ
-================================================= */
+/* ========================================================
+   INVERSO
+======================================================== */
 
-function squareRoot(){
+function inverse(){
 
 let value=
 Number(current);
 
 
-if(value<0){
+if(
+value===0
+){
 
 current="Erro";
 
 }else{
 
 current=
-String(Math.sqrt(value));
+String(
+1/value
+);
 
 }
 
 
 justCalculated=true;
 
-render();
+renderCalculator();
 
 }
 
 
-/* =================================================
+/* ========================================================
    MEMÓRIA
-================================================= */
+======================================================== */
 
 function memoryClear(){
 
@@ -2077,9 +2500,28 @@ function memoryRecall(){
 current=
 String(memory);
 
+waitingForNumber=false;
+
 justCalculated=false;
 
-render();
+renderCalculator();
+
+}
+
+
+function memoryStore(){
+
+let value=
+Number(current);
+
+
+if(
+Number.isFinite(value)
+){
+
+memory=value;
+
+}
 
 }
 
@@ -2089,7 +2531,10 @@ function memoryAdd(){
 let value=
 Number(current);
 
-if(Number.isFinite(value)){
+
+if(
+Number.isFinite(value)
+){
 
 memory+=value;
 
@@ -2103,7 +2548,10 @@ function memorySubtract(){
 let value=
 Number(current);
 
-if(Number.isFinite(value)){
+
+if(
+Number.isFinite(value)
+){
 
 memory-=value;
 
@@ -2112,141 +2560,161 @@ memory-=value;
 }
 
 
-function memoryStore(){
-
-let value=
-Number(current);
-
-if(Number.isFinite(value)){
-
-memory=value;
-
-}
-
-}
-
-
-/* =================================================
-   BOTÕES
-================================================= */
+/* ========================================================
+   EVENTOS DOS NÚMEROS
+======================================================== */
 
 document
 .querySelectorAll(
-".calc-grid button"
+"[data-number]"
 )
 .forEach(function(button){
 
-button.addEventListener(
-"click",
-function(){
+button.onclick=function(){
 
-let value=
-button.dataset.v;
+inputNumber(
+button.dataset.number
+);
+
+};
+
+});
 
 
-if(/^[0-9]$/.test(value)){
+/* ========================================================
+   EVENTOS DOS OPERADORES
+======================================================== */
 
-enterNumber(value);
-return;
+document
+.querySelectorAll(
+"[data-op]"
+)
+.forEach(function(button){
+
+button.onclick=function(){
+
+inputOperator(
+button.dataset.op
+);
+
+};
+
+});
+
+
+/* ========================================================
+   AÇÕES
+======================================================== */
+
+document
+.querySelectorAll(
+"[data-action]"
+)
+.forEach(function(button){
+
+button.onclick=function(){
+
+let action=
+button.dataset.action;
+
+
+if(
+action==="percent"
+){
+
+percent();
 
 }
 
 
-if(value===","){
-
-enterDecimal();
-return;
-
-}
-
-
-if(isOperator(value)){
-
-enterOperator(value);
-return;
-
-}
-
-
-if(value==="="){
-
-equals();
-return;
-
-}
-
-
-if(value==="%"){
-
-percentage();
-return;
-
-}
-
-
-if(value==="C"){
-
-clearAll();
-return;
-
-}
-
-
-if(value==="CE"){
+else if(
+action==="ce"
+){
 
 clearEntry();
-return;
 
 }
 
 
-if(value==="back"){
+else if(
+action==="clear"
+){
+
+clearCalculator();
+
+}
+
+
+else if(
+action==="back"
+){
 
 backspace();
-return;
 
 }
 
 
-if(value==="sign"){
-
-toggleSign();
-return;
-
-}
-
-
-if(value==="inverse"){
+else if(
+action==="inverse"
+){
 
 inverse();
-return;
 
 }
 
 
-if(value==="square"){
+else if(
+action==="square"
+){
 
 square();
-return;
 
 }
 
 
-if(value==="sqrt"){
+else if(
+action==="sqrt"
+){
 
 squareRoot();
-return;
 
 }
 
-});
+
+else if(
+action==="sign"
+){
+
+toggleSign();
+
+}
+
+
+else if(
+action==="decimal"
+){
+
+inputDecimal();
+
+}
+
+
+else if(
+action==="equals"
+){
+
+calculate();
+
+}
+
+};
 
 });
 
 
-/* =================================================
+/* ========================================================
    MEMÓRIA
-================================================= */
+======================================================== */
 
 document
 .querySelectorAll(
@@ -2254,40 +2722,55 @@ document
 )
 .forEach(function(button){
 
-button.addEventListener(
-"click",
-function(){
+button.onclick=function(){
 
-let value=
+let action=
 button.dataset.memory;
 
 
-if(value==="MC")
+if(
+action==="MC"
+)
 memoryClear();
 
-if(value==="MR")
+
+if(
+action==="MR"
+)
 memoryRecall();
 
-if(value==="M+")
-memoryAdd();
 
-if(value==="M-")
-memorySubtract();
-
-if(value==="MS")
+if(
+action==="MS"
+)
 memoryStore();
 
-if(value==="MRC")
+
+if(
+action==="M+"
+)
+memoryAdd();
+
+
+if(
+action==="M-"
+)
+memorySubtract();
+
+
+if(
+action==="MRC"
+)
 memoryRecall();
 
-});
+};
 
 });
 
 
-/* =================================================
+/* ========================================================
    TECLADO DO COMPUTADOR
-================================================= */
+======================================================== */
 
 document.addEventListener(
 "keydown",
@@ -2302,29 +2785,34 @@ key>="0" &&
 key<="9"
 ){
 
-enterNumber(key);
+inputNumber(key);
+
 return;
 
 }
 
 
 if(
-key==="," ||
-key=="."
+key==="." ||
+key===","
 ){
 
-enterDecimal();
+inputDecimal();
+
 return;
 
 }
 
 
 if(
-["+","-","*","/"]
-.includes(key)
+key==="+" ||
+key==="-" ||
+key==="*" ||
+key==="/"
 ){
 
-enterOperator(key);
+inputOperator(key);
+
 return;
 
 }
@@ -2337,32 +2825,41 @@ key==="="
 
 event.preventDefault();
 
-equals();
+calculate();
 
 return;
 
 }
 
 
-if(key==="Backspace"){
+if(
+key==="Backspace"
+){
 
 backspace();
+
 return;
 
 }
 
 
-if(key==="Escape"){
+if(
+key==="Escape"
+){
 
-clearAll();
+clearCalculator();
+
 return;
 
 }
 
 
-if(key==="%"){
+if(
+key==="%"
+){
 
-percentage();
+percent();
+
 return;
 
 }
@@ -2370,9 +2867,9 @@ return;
 });
 
 
-/* =================================================
+/* ========================================================
    INSTALAÇÃO
-================================================= */
+======================================================== */
 
 let deferredPrompt=null;
 
@@ -2389,14 +2886,12 @@ deferredPrompt=event;
 
 
 document
-.getElementById(
-"installButton"
-)
-.addEventListener(
-"click",
-async function(){
+.getElementById("installButton")
+.onclick=async function(){
 
-if(deferredPrompt){
+if(
+deferredPrompt
+){
 
 deferredPrompt.prompt();
 
@@ -2409,45 +2904,55 @@ return;
 }
 
 
-let ios=
+const isIOS=
 /iphone|ipad|ipod/i
 .test(
 navigator.userAgent
 );
 
 
-let standalone=
+const isStandalone=
 window.navigator.standalone===true ||
 window.matchMedia(
 "(display-mode: standalone)"
 ).matches;
 
 
-if(ios && !standalone){
+if(
+isIOS &&
+!isStandalone
+){
 
 alert(
+
 "📲 INSTALAR CALCULADORA DIALLI\n\n"+
 "1. Toque em COMPARTILHAR no Safari.\n\n"+
 "2. Escolha “Adicionar à Tela de Início”.\n\n"+
 "3. Toque em “Adicionar”."
+
 );
 
 }else{
 
 alert(
+
 "Abra o menu do navegador e escolha “Instalar aplicativo” ou “Adicionar à tela inicial”."
+
 );
 
 }
 
-});
+};
 
 
-/* =================================================
+/* ========================================================
    SERVICE WORKER
-================================================= */
+======================================================== */
 
-if("serviceWorker" in navigator){
+if(
+"serviceWorker"
+in navigator
+){
 
 window.addEventListener(
 "load",
@@ -2462,13 +2967,14 @@ navigator.serviceWorker
 }
 
 
-/* =================================================
-   INICIAR
-================================================= */
+/* ========================================================
+   INÍCIO
+======================================================== */
 
-render();
+renderCalculator();
 
 </script>
 
 </body>
+
 </html>
