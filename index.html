@@ -1,18 +1,1945 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+
 <meta name="theme-color" content="#075b2c">
 
 <meta name="apple-mobile-web-app-capable" content="yes">
-
 <meta name="apple-mobile-web-app-title" content="Dialli">
-
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
 <link rel="manifest" href="./manifest.json">
 
 <link rel="apple-touch-icon"
-      sizes="180x180"
-      href="./icon-180.png">
+sizes="180x180"
+href="./icon-180.png">
 
 <link rel="icon"
-      type="image/png"
-      sizes="192x192"
-      href="./icon-192.png">
+type="image/png"
+sizes="192x192"
+href="./icon-192.png">
+
+<title>Calculadora Dialli</title>
+
+<style>
+
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+margin:0;
+min-height:100%;
+font-family:Arial,Helvetica,sans-serif;
+background:#06351f;
+}
+
+body{
+color:#fff;
+}
+
+.app{
+min-height:100vh;
+padding:8px 10px max(18px,env(safe-area-inset-bottom));
+background:linear-gradient(145deg,#012b17,#00642f,#012616);
+}
+
+.box{
+width:100%;
+max-width:760px;
+margin:auto;
+}
+
+.modebar{
+display:flex;
+justify-content:center;
+gap:5px;
+margin-bottom:5px;
+}
+
+.modebar button{
+border:1px solid rgba(255,255,255,.35);
+background:rgba(255,255,255,.1);
+color:#fff;
+border-radius:9px;
+padding:6px 13px;
+font-size:12px;
+font-weight:bold;
+}
+
+.modebar button.active{
+background:#ffd000;
+color:#06351f;
+}
+
+.logo{
+width:min(94%,520px);
+margin:auto;
+}
+
+.logo img{
+width:100%;
+display:block;
+border-radius:20px;
+}
+
+h1{
+text-align:center;
+font-size:29px;
+margin:5px 0;
+}
+
+.intro{
+text-align:center;
+font-size:14px;
+line-height:1.35;
+margin:0 10px 13px;
+}
+
+.screen{
+display:none;
+}
+
+.screen.active{
+display:block;
+}
+
+.card,
+.calc-card{
+background:#fff;
+border-radius:24px;
+padding:15px;
+border:3px solid #15914b;
+}
+
+.card label{
+display:block;
+color:#075b2c;
+font-weight:bold;
+font-size:15px;
+margin-bottom:6px;
+}
+
+.input{
+display:flex;
+border:3px solid #15914b;
+border-radius:13px;
+overflow:hidden;
+}
+
+.input span{
+display:flex;
+align-items:center;
+padding:0 13px;
+color:#075b2c;
+font-size:18px;
+font-weight:bold;
+}
+
+.input input{
+width:100%;
+height:53px;
+border:0;
+outline:0;
+font-size:20px;
+padding:0 10px;
+}
+
+.hint{
+font-size:12px;
+color:#68766f;
+margin:5px 0 15px;
+}
+
+.result{
+background:#fff;
+border-radius:20px;
+padding:15px;
+text-align:center;
+margin-top:10px;
+border:3px solid #38bf70;
+}
+
+.result h2{
+color:#145d35;
+font-size:17px;
+margin:0;
+}
+
+.num{
+font-size:31px;
+font-weight:900;
+color:#075b2c;
+margin:8px 0 4px;
+}
+
+.result p{
+color:#68756f;
+font-size:13px;
+margin:0;
+}
+
+.formulas{
+background:#fff;
+color:#123;
+border-radius:20px;
+padding:15px;
+margin-top:10px;
+font-size:13px;
+line-height:1.55;
+}
+
+.formulas b{
+color:#075b2c;
+font-size:16px;
+}
+
+.action,
+.install-button{
+width:100%;
+height:53px;
+margin-top:12px;
+border:0;
+border-radius:14px;
+font-weight:bold;
+font-size:15px;
+}
+
+.action{
+background:#075b2c;
+color:#fff;
+}
+
+.install-button{
+background:#15914b;
+color:#fff;
+}
+
+.memory{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:2px;
+margin-bottom:4px;
+}
+
+.memory button{
+border:0;
+background:transparent;
+color:#075b2c;
+height:27px;
+font-size:11px;
+font-weight:bold;
+}
+
+.display{
+background:#06351f;
+border-radius:18px;
+min-height:142px;
+padding:12px 15px;
+margin-bottom:5px;
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+text-align:right;
+overflow:hidden;
+}
+
+.expression{
+min-height:34px;
+color:#aebbb4;
+font-size:clamp(17px,4vw,25px);
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.result-number{
+color:#fff;
+font-size:clamp(40px,11vw,60px);
+font-weight:900;
+line-height:1.05;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis;
+}
+
+.keys{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:2px;
+}
+
+.keys button{
+height:62px;
+border:0;
+border-radius:50%;
+background:transparent;
+color:#075b2c;
+font-size:25px;
+font-weight:500;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:transform .07s,background .07s;
+}
+
+.keys button:active{
+background:rgba(21,145,75,.12);
+transform:scale(.88);
+}
+
+.keys .op{
+color:#15914b;
+font-size:29px;
+}
+
+.keys .special{
+font-size:22px;
+}
+
+.keys .clear{
+color:#d85a54;
+}
+
+.keys .equal{
+width:76px;
+height:76px;
+justify-self:center;
+align-self:center;
+background:#21c94b;
+color:#fff;
+font-size:34px;
+font-weight:600;
+}
+
+.footer{
+text-align:center;
+padding:18px 0 4px;
+font-size:14px;
+line-height:1.5;
+}
+
+.footer strong{
+display:block;
+text-align:center;
+font-size:20px;
+}
+
+@media(max-width:600px){
+
+.keys button{
+height:58px;
+font-size:23px;
+}
+
+.keys .op{
+font-size:27px;
+}
+
+.keys .equal{
+width:70px;
+height:70px;
+font-size:31px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="box">
+
+<!-- ABAS -->
+
+<div class="modebar">
+
+<button id="mTab" class="active">
+MARGEM
+</button>
+
+<button id="cTab">
+CALCULADORA
+</button>
+
+</div>
+
+
+<!-- LOGO -->
+
+<div class="logo">
+
+<img
+src="./icon-512.png"
+alt="Dialli Distribuidora">
+
+</div>
+
+
+<!-- =========================
+     CALCULADORA DE MARGEM
+========================= -->
+
+<section id="margin" class="screen active">
+
+<h1>
+CALCULADORA <span style="color:#ffd000">DIALLI</span>
+</h1>
+
+<p class="intro">
+Digite o custo e o preço de venda.
+A calculadora informa automaticamente lucro, margem e markup.
+</p>
+
+
+<div class="card">
+
+<label>
+CUSTO DO PRODUTO
+</label>
+
+<div class="input">
+
+<span>R$</span>
+
+<input
+id="cost"
+inputmode="decimal"
+placeholder="Digite o custo">
+
+</div>
+
+<div class="hint">
+Ex.: 6,90
+</div>
+
+
+<label>
+PREÇO DE VENDA / OFERTA
+</label>
+
+<div class="input">
+
+<span>R$</span>
+
+<input
+id="sale"
+inputmode="decimal"
+placeholder="Digite o preço">
+
+</div>
+
+<div class="hint">
+Ex.: 10,00
+</div>
+
+</div>
+
+
+<div class="result">
+
+<h2>
+PREÇO DE VENDA
+</h2>
+
+<div id="rv" class="num">
+—
+</div>
+
+<p>
+Preço informado
+</p>
+
+</div>
+
+
+<div class="result">
+
+<h2>
+LUCRO BRUTO
+</h2>
+
+<div id="rl" class="num">
+—
+</div>
+
+<p>
+Venda − custo
+</p>
+
+</div>
+
+
+<div class="result">
+
+<h2>
+MARGEM REAL
+</h2>
+
+<div id="rm" class="num">
+—
+</div>
+
+<p>
+Lucro ÷ venda × 100
+</p>
+
+</div>
+
+
+<div class="result">
+
+<h2>
+MARKUP
+</h2>
+
+<div id="rk" class="num">
+—
+</div>
+
+<p>
+Venda ÷ custo
+</p>
+
+</div>
+
+
+<div class="formulas">
+
+<b>
+FÓRMULAS
+</b>
+
+<br>
+
+Lucro = Preço de Venda − Custo
+
+<br>
+
+Margem = Lucro ÷ Preço de Venda × 100
+
+<br>
+
+Markup = Preço de Venda ÷ Custo
+
+</div>
+
+
+<button
+id="clearMargin"
+class="action">
+
+LIMPAR TUDO
+
+</button>
+
+</section>
+
+
+<!-- =========================
+     CALCULADORA
+========================= -->
+
+<section id="calc" class="screen">
+
+<h1>
+CALCULADORA <span style="color:#ffd000">DIALLI</span>
+</h1>
+
+<p class="intro">
+Calculadora completa para contas rápidas do dia a dia.
+</p>
+
+
+<div class="calc-card">
+
+
+<!-- MEMÓRIA -->
+
+<div class="memory">
+
+<button data-m="MC">
+MC
+</button>
+
+<button data-m="MR">
+MR
+</button>
+
+<button data-m="M+">
+M+
+</button>
+
+<button data-m="M-">
+M−
+</button>
+
+<button data-m="MS">
+MS
+</button>
+
+</div>
+
+
+<!-- DISPLAY -->
+
+<div class="display">
+
+<div
+id="expr"
+class="expression">
+</div>
+
+<div
+id="num"
+class="result-number">
+0
+</div>
+
+</div>
+
+
+<!-- TECLADO -->
+
+<div class="keys">
+
+
+<button
+class="special clear"
+data-a="clear">
+C
+</button>
+
+<button
+class="special"
+data-a="paren">
+( )
+</button>
+
+<button
+class="special"
+data-a="percent">
+%
+</button>
+
+<button
+class="op"
+data-o="/">
+÷
+</button>
+
+
+<button data-n="7">
+7
+</button>
+
+<button data-n="8">
+8
+</button>
+
+<button data-n="9">
+9
+</button>
+
+<button
+class="op"
+data-o="*">
+×
+</button>
+
+
+<button data-n="4">
+4
+</button>
+
+<button data-n="5">
+5
+</button>
+
+<button data-n="6">
+6
+</button>
+
+<button
+class="op"
+data-o="-">
+−
+</button>
+
+
+<button data-n="1">
+1
+</button>
+
+<button data-n="2">
+2
+</button>
+
+<button data-n="3">
+3
+</button>
+
+<button
+class="op"
+data-o="+">
++
+</button>
+
+
+<button
+class="special"
+data-a="sign">
++/−
+</button>
+
+<button data-n="0">
+0
+</button>
+
+<button
+class="special"
+data-a="decimal">
+,
+</button>
+
+<button
+class="equal"
+data-a="equals">
+=
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- INSTALAR -->
+
+<button
+id="install"
+class="install-button">
+
+📲 INSTALAR CALCULADORA DIALLI
+
+</button>
+
+
+<!-- ASSINATURA -->
+
+<div class="footer">
+
+criado e desenvolvido por
+
+<strong>
+João Siena.
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   FORMATAÇÃO
+========================= */
+
+function parseBR(value){
+
+value=String(value||"")
+.trim()
+.replace(/\s/g,"");
+
+if(!value)
+return null;
+
+if(
+value.includes(",") &&
+value.includes(".")
+){
+
+value=value
+.replace(/\./g,"")
+.replace(",",".");
+}
+
+else if(
+value.includes(",")
+){
+
+value=value
+.replace(",",".");
+}
+
+else if(
+value.includes(".") &&
+value.split(".")[1] &&
+value.split(".")[1].length===3
+){
+
+value=value
+.replace(".","");
+}
+
+const n=Number(value);
+
+return Number.isFinite(n)
+?n
+:null;
+
+}
+
+
+const nf=new Intl.NumberFormat(
+"pt-BR",
+{
+useGrouping:true,
+maximumFractionDigits:12
+}
+);
+
+
+const money=new Intl.NumberFormat(
+"pt-BR",
+{
+style:"currency",
+currency:"BRL"
+}
+);
+
+
+const percent=new Intl.NumberFormat(
+"pt-BR",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}
+);
+
+
+/* =========================
+   MARGEM
+========================= */
+
+const cost=
+document.getElementById("cost");
+
+const sale=
+document.getElementById("sale");
+
+const rv=
+document.getElementById("rv");
+
+const rl=
+document.getElementById("rl");
+
+const rm=
+document.getElementById("rm");
+
+const rk=
+document.getElementById("rk");
+
+
+function marginCalc(){
+
+const c=parseBR(cost.value);
+
+const s=parseBR(sale.value);
+
+
+if(
+c===null ||
+s===null ||
+c<=0 ||
+s===null
+){
+
+rv.textContent="—";
+rl.textContent="—";
+rm.textContent="—";
+rk.textContent="—";
+
+return;
+
+}
+
+
+const lucro=s-c;
+
+
+rv.textContent=
+money.format(s);
+
+rl.textContent=
+money.format(lucro);
+
+rm.textContent=
+percent.format(
+(lucro/s)*100
+)+"%";
+
+rk.textContent=
+percent.format(
+s/c
+)+"x";
+
+}
+
+
+cost.oninput=marginCalc;
+
+sale.oninput=marginCalc;
+
+
+document
+.getElementById("clearMargin")
+.onclick=function(){
+
+cost.value="";
+
+sale.value="";
+
+marginCalc();
+
+};
+
+
+/* =========================
+   ABAS
+========================= */
+
+const marginScreen=
+document.getElementById("margin");
+
+const calcScreen=
+document.getElementById("calc");
+
+const mTab=
+document.getElementById("mTab");
+
+const cTab=
+document.getElementById("cTab");
+
+
+mTab.onclick=function(){
+
+marginScreen.classList.add("active");
+
+calcScreen.classList.remove("active");
+
+mTab.classList.add("active");
+
+cTab.classList.remove("active");
+
+};
+
+
+cTab.onclick=function(){
+
+calcScreen.classList.add("active");
+
+marginScreen.classList.remove("active");
+
+cTab.classList.add("active");
+
+mTab.classList.remove("active");
+
+};
+
+
+/* =========================
+   CALCULADORA
+========================= */
+
+let tokens=[];
+
+let current="0";
+
+let entering=true;
+
+let lastExpression="";
+
+let memory=0;
+
+let parenOpen=false;
+
+
+const numDisplay=
+document.getElementById("num");
+
+const expressionDisplay=
+document.getElementById("expr");
+
+
+const operators=[
+"+",
+"-",
+"*",
+"/"
+];
+
+
+const symbols={
+"+":"+",
+"-":"−",
+"*":"×",
+"/":"÷"
+};
+
+
+/* =========================
+   RENDER
+========================= */
+
+function render(){
+
+let expression="";
+
+
+if(lastExpression){
+
+expression=lastExpression;
+
+}
+
+else{
+
+expression=tokens
+.map(function(t){
+
+if(
+operators.includes(t)
+){
+
+return symbols[t];
+
+}
+
+if(
+t==="("
+||
+t===")"
+){
+
+return t;
+
+}
+
+return nf.format(
+Number(t)
+);
+
+})
+.join(" ");
+
+}
+
+
+expressionDisplay.textContent=
+expression;
+
+if(current==="Erro"){
+
+numDisplay.textContent="Erro";
+
+}
+
+else{
+
+numDisplay.textContent=
+nf.format(Number(current));
+
+}
+
+}
+
+
+/* =========================
+   NÚMEROS
+========================= */
+
+function inputNumber(n){
+
+if(current==="Erro"){
+
+clearCalc();
+
+}
+
+
+if(entering){
+
+current=n;
+
+entering=false;
+
+lastExpression="";
+
+}
+
+else{
+
+if(current==="0"){
+
+current=n;
+
+}
+
+else{
+
+current+=n;
+
+}
+
+}
+
+
+render();
+
+}
+
+
+/* =========================
+   DECIMAL
+========================= */
+
+function decimal(){
+
+if(current==="Erro"){
+
+clearCalc();
+
+}
+
+
+if(entering){
+
+current="0.";
+
+entering=false;
+
+lastExpression="";
+
+}
+
+else if(
+!current.includes(".")
+){
+
+current+=".";
+
+}
+
+
+render();
+
+}
+
+
+/* =========================
+   OPERAÇÃO
+========================= */
+
+function inputOperator(op){
+
+if(current==="Erro")
+return;
+
+
+if(!entering){
+
+tokens.push(current);
+
+entering=true;
+
+}
+
+
+if(
+tokens.length &&
+operators.includes(
+tokens[tokens.length-1]
+)
+){
+
+tokens[
+tokens.length-1
+]=op;
+
+}
+
+else{
+
+tokens.push(op);
+
+}
+
+
+lastExpression="";
+
+render();
+
+}
+
+
+/* =========================
+   PARÊNTESES
+========================= */
+
+function parentheses(){
+
+if(current==="Erro"){
+
+clearCalc();
+
+}
+
+
+if(
+tokens.length===0 &&
+entering
+){
+
+tokens.push("(");
+
+parenOpen=true;
+
+entering=true;
+
+render();
+
+return;
+
+}
+
+
+if(
+!entering
+){
+
+tokens.push(current);
+
+current="0";
+
+entering=true;
+
+}
+
+
+if(parenOpen){
+
+tokens.push(")");
+
+parenOpen=false;
+
+}
+
+else{
+
+tokens.push("(");
+
+parenOpen=true;
+
+}
+
+
+lastExpression="";
+
+render();
+
+}
+
+
+/* =========================
+   CÁLCULO
+========================= */
+
+function calculateExpression(arr){
+
+let values=[];
+
+let ops=[];
+
+let precedence=function(op){
+
+if(op==="+" || op==="-")
+return 1;
+
+if(op==="*" || op==="/")
+return 2;
+
+return 0;
+
+};
+
+
+function apply(){
+
+const op=
+ops.pop();
+
+const b=
+values.pop();
+
+const a=
+values.pop();
+
+
+if(
+a===undefined ||
+b===undefined
+){
+
+return false;
+
+}
+
+
+if(
+op==="/" &&
+b===0
+){
+
+return false;
+
+}
+
+
+let result;
+
+
+if(op==="+")
+result=a+b;
+
+if(op==="-")
+result=a-b;
+
+if(op==="*")
+result=a*b;
+
+if(op==="/")
+result=a/b;
+
+
+values.push(result);
+
+return true;
+
+}
+
+
+for(
+let i=0;
+i<arr.length;
+i++
+){
+
+const token=arr[i];
+
+
+if(token==="("){
+
+ops.push(token);
+
+continue;
+
+}
+
+
+if(token===")"){
+
+while(
+ops.length &&
+ops[ops.length-1]!=="("
+){
+
+if(!apply())
+return null;
+
+}
+
+
+if(
+!ops.length
+){
+
+return null;
+
+}
+
+
+ops.pop();
+
+continue;
+
+}
+
+
+if(
+operators.includes(token)
+){
+
+while(
+ops.length &&
+ops[ops.length-1]!=="(" &&
+precedence(
+ops[ops.length-1]
+)>=precedence(token)
+){
+
+if(!apply())
+return null;
+
+}
+
+
+ops.push(token);
+
+continue;
+
+}
+
+
+values.push(
+Number(token)
+);
+
+}
+
+
+while(ops.length){
+
+if(
+ops[ops.length-1]==="("
+){
+
+return null;
+
+}
+
+if(!apply())
+return null;
+
+}
+
+
+if(values.length!==1)
+return null;
+
+
+return Math.round(
+(values[0]+Number.EPSILON)
+*1000000000000
+)/1000000000000;
+
+}
+
+
+/* =========================
+   IGUAL
+========================= */
+
+function equals(){
+
+let arr=
+tokens.slice();
+
+
+if(!entering){
+
+arr.push(current);
+
+}
+
+
+while(
+arr.length &&
+operators.includes(
+arr[arr.length-1]
+)
+){
+
+arr.pop();
+
+}
+
+
+if(!arr.length)
+return;
+
+
+const result=
+calculateExpression(arr);
+
+
+lastExpression=
+arr
+.map(function(x){
+
+if(
+operators.includes(x)
+){
+
+return symbols[x];
+
+}
+
+return x;
+
+})
+.join(" ")+" =";
+
+
+if(result===null){
+
+current="Erro";
+
+entering=true;
+
+}
+
+else{
+
+current=
+String(result);
+
+tokens=[];
+
+entering=true;
+
+}
+
+
+render();
+
+}
+
+
+/* =========================
+   LIMPAR
+========================= */
+
+function clearCalc(){
+
+tokens=[];
+
+current="0";
+
+entering=true;
+
+lastExpression="";
+
+render();
+
+}
+
+
+/* =========================
+   SINAL
+========================= */
+
+function changeSign(){
+
+if(
+current!=="0" &&
+current!=="Erro"
+){
+
+if(
+current.startsWith("-")
+){
+
+current=
+current.slice(1);
+
+}
+
+else{
+
+current="-"+current;
+
+}
+
+}
+
+
+render();
+
+}
+
+
+/* =========================
+   PORCENTAGEM
+========================= */
+
+function percentage(){
+
+const n=
+Number(current);
+
+
+if(
+Number.isFinite(n)
+){
+
+current=
+String(n/100);
+
+entering=false;
+
+}
+
+
+render();
+
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+document
+.querySelectorAll("[data-n]")
+.forEach(function(button){
+
+button.onclick=function(){
+
+inputNumber(
+button.dataset.n
+);
+
+};
+
+});
+
+
+document
+.querySelectorAll("[data-o]")
+.forEach(function(button){
+
+button.onclick=function(){
+
+inputOperator(
+button.dataset.o
+);
+
+};
+
+});
+
+
+document
+.querySelectorAll("[data-a]")
+.forEach(function(button){
+
+button.onclick=function(){
+
+const action=
+button.dataset.a;
+
+
+if(action==="clear")
+clearCalc();
+
+if(action==="decimal")
+decimal();
+
+if(action==="equals")
+equals();
+
+if(action==="sign")
+changeSign();
+
+if(action==="percent")
+percentage();
+
+if(action==="paren")
+parentheses();
+
+};
+
+});
+
+
+/* =========================
+   MEMÓRIA
+========================= */
+
+document
+.querySelectorAll("[data-m]")
+.forEach(function(button){
+
+button.onclick=function(){
+
+const action=
+button.dataset.m;
+
+const n=
+Number(current);
+
+
+if(action==="MC"){
+
+memory=0;
+
+}
+
+
+if(action==="MR"){
+
+current=
+String(memory);
+
+entering=false;
+
+}
+
+
+if(action==="MS"){
+
+if(
+Number.isFinite(n)
+){
+
+memory=n;
+
+}
+
+}
+
+
+if(action==="M+"){
+
+if(
+Number.isFinite(n)
+){
+
+memory+=n;
+
+}
+
+}
+
+
+if(action==="M-"){
+
+if(
+Number.isFinite(n)
+){
+
+memory-=n;
+
+}
+
+}
+
+
+render();
+
+};
+
+});
+
+
+/* =========================
+   TECLADO
+========================= */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+if(
+event.key>="0" &&
+event.key<="9"
+){
+
+inputNumber(
+event.key
+);
+
+return;
+
+}
+
+
+if(
+event.key==="." ||
+event.key===","
+){
+
+decimal();
+
+return;
+
+}
+
+
+if(
+operators.includes(
+event.key
+)
+){
+
+inputOperator(
+event.key
+);
+
+return;
+
+}
+
+
+if(
+event.key==="Enter" ||
+event.key==="="
+){
+
+event.preventDefault();
+
+equals();
+
+return;
+
+}
+
+
+if(
+event.key==="Escape"
+){
+
+clearCalc();
+
+}
+
+}
+);
+
+
+/* =========================
+   PWA / INSTALAÇÃO
+========================= */
+
+let deferredPrompt=null;
+
+
+window.addEventListener(
+"beforeinstallprompt",
+function(event){
+
+event.preventDefault();
+
+deferredPrompt=event;
+
+}
+);
+
+
+document
+.getElementById("install")
+.onclick=async function(){
+
+if(deferredPrompt){
+
+await deferredPrompt.prompt();
+
+await deferredPrompt.userChoice;
+
+deferredPrompt=null;
+
+return;
+
+}
+
+
+if(
+/iphone|ipad|ipod/i
+.test(navigator.userAgent)
+){
+
+alert(
+"Para instalar no iPhone:\n\n"+
+"1. Toque em Compartilhar.\n"+
+"2. Escolha 'Adicionar à Tela de Início'.\n"+
+"3. Toque em 'Adicionar'."
+);
+
+}
+
+else{
+
+alert(
+"Abra esta página no Google Chrome e use a opção 'Instalar aplicativo'."
+);
+
+}
+
+};
+
+
+window.addEventListener(
+"appinstalled",
+function(){
+
+deferredPrompt=null;
+
+}
+);
+
+
+/* =========================
+   SERVICE WORKER
+========================= */
+
+if(
+"serviceWorker" in navigator
+){
+
+window.addEventListener(
+"load",
+function(){
+
+navigator
+.serviceWorker
+.register("./sw.js")
+.catch(function(error){
+
+console.log(
+"Service Worker:",
+error
+);
+
+});
+
+}
+);
+
+}
+
+
+/* =========================
+   INICIAR
+========================= */
+
+render();
+
+</script>
+
+</body>
+</html>
