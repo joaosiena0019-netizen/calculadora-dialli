@@ -1,4 +1,4 @@
-const CACHE_NAME = "calculadora-dialli-v6";
+const CACHE_NAME = "calculadora-dialli-v7";
 
 const FILES = [
   "./",
@@ -9,100 +9,72 @@ const FILES = [
   "./icon-512.png"
 ];
 
-self.addEventListener("install", function(event) {
+self.addEventListener("install", event => {
 
   event.waitUntil(
 
     caches.open(CACHE_NAME)
-    .then(function(cache) {
-
-      return cache.addAll(FILES);
-
-    })
-    .then(function() {
-
-      return self.skipWaiting();
-
-    })
+      .then(cache => cache.addAll(FILES))
+      .then(() => self.skipWaiting())
 
   );
 
 });
 
 
-self.addEventListener("activate", function(event) {
+self.addEventListener("activate", event => {
 
   event.waitUntil(
 
     caches.keys()
-    .then(function(keys) {
+      .then(keys => {
 
-      return Promise.all(
+        return Promise.all(
 
-        keys
-        .filter(function(key) {
+          keys
+            .filter(key => key !== CACHE_NAME)
+            .map(key => caches.delete(key))
 
-          return key !== CACHE_NAME;
+        );
 
-        })
-        .map(function(key) {
-
-          return caches.delete(key);
-
-        })
-
-      );
-
-    })
-    .then(function() {
-
-      return self.clients.claim();
-
-    })
+      })
+      .then(() => self.clients.claim())
 
   );
 
 });
 
 
-self.addEventListener("fetch", function(event) {
+self.addEventListener("fetch", event => {
 
-  if(event.request.method !== "GET") {
+  if (event.request.method !== "GET") {
     return;
   }
 
   event.respondWith(
 
     fetch(event.request)
-    .then(function(response) {
+      .then(response => {
 
-      if(response.ok) {
+        if (response.ok) {
 
-        const copy =
-          response.clone();
+          const copy = response.clone();
 
-        caches.open(CACHE_NAME)
-        .then(function(cache) {
+          caches.open(CACHE_NAME)
+            .then(cache => {
+              cache.put(event.request, copy);
+            });
 
-          cache.put(
-            event.request,
-            copy
-          );
+        }
 
-        });
+        return response;
 
-      }
+      })
+      .catch(() => {
 
-      return response;
+        return caches.match(event.request);
 
-    })
-    .catch(function() {
-
-      return caches.match(
-        event.request
-      );
-
-    })
+      })
 
   );
 
