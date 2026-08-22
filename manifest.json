@@ -1,17 +1,9 @@
 {
   "name": "Calculadora Dialli",
   "short_name": "Dialli",
-  "description": "Calculadora de margem, lucro, markup e cálculos rápidos da Dialli.",
   "start_url": "./",
-  "scope": "./",
   "display": "standalone",
-  "background_color": "#012b17",
+  "background_color": "#06351f",
   "theme_color": "#075b2c",
-  "orientation": "portrait",
-  "lang": "pt-BR",
-  "icons": [
-    {"src":"./icon-180.png","sizes":"180x180","type":"image/png"},
-    {"src":"./icon-192.png","sizes":"192x192","type":"image/png"},
-    {"src":"./icon-512.png","sizes":"512x512","type":"image/png"}
-  ]
+  "orientation": "portrait"
 }
