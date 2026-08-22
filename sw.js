@@ -1,78 +1,84 @@
-const CACHE_NAME = "calculadora-dialli-v7";
+const CACHE_NAME = "calculadora-dialli-v5";
 
 const FILES = [
   "./",
   "./index.html",
   "./manifest.json",
+  "./sw.js",
   "./icon-180.png",
-  "./icon-192.png",
-  "./icon-512.png"
+  "./logo-dialli.png"
 ];
 
 self.addEventListener("install", event => {
 
   event.waitUntil(
-
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(FILES))
-      .then(() => self.skipWaiting())
-
   );
 
-});
+  self.skipWaiting();
 
+});
 
 self.addEventListener("activate", event => {
 
   event.waitUntil(
 
-    caches.keys()
-      .then(keys => {
+    caches.keys().then(keys =>
 
-        return Promise.all(
+      Promise.all(
+        keys
+          .filter(key => key !== CACHE_NAME)
+          .map(key => caches.delete(key))
+      )
 
-          keys
-            .filter(key => key !== CACHE_NAME)
-            .map(key => caches.delete(key))
-
-        );
-
-      })
-      .then(() => self.clients.claim())
+    )
 
   );
 
-});
+  self.clients.claim();
 
+});
 
 self.addEventListener("fetch", event => {
 
-  if (event.request.method !== "GET") {
-    return;
-  }
-
   event.respondWith(
 
-    fetch(event.request)
-      .then(response => {
+    caches.match(event.request)
+      .then(cached => {
 
-        if (response.ok) {
-
-          const copy = response.clone();
-
-          caches.open(CACHE_NAME)
-            .then(cache => {
-              cache.put(event.request, copy);
-            });
-
+        if(cached){
+          return cached;
         }
 
-        return response;
+        return fetch(event.request)
+          .then(response => {
 
-      })
-      .catch(() => {
+            if(
+              !response ||
+              response.status !== 200 ||
+              response.type === "opaque"
+            ){
 
-        return caches.match(event.request);
+              return response;
+
+            }
+
+            const copy=response.clone();
+
+            caches.open(CACHE_NAME)
+              .then(cache=>{
+                cache.put(event.request,copy);
+              });
+
+            return response;
+
+          })
+          .catch(()=>{
+
+            return caches.match("./index.html");
+
+          });
 
       })
 
