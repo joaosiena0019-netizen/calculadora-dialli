@@ -1,1 +1,2177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Calculadora Dialli</title>
+<meta name="theme-color" content="#06351f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Calculadora Dialli">
+<meta name="apple-touch-fullscreen" content="yes">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" href="./icon-180.png">
+<link rel="apple-touch-icon" href="./icon-180.png">
 
+<style>
+*{
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent
+}
+
+html,body{
+margin:0;
+padding:0;
+min-height:100%;
+font-family:Arial,Helvetica,sans-serif;
+background:#06351f
+}
+
+body{
+color:#fff
+}
+
+button,input{
+font-family:inherit
+}
+
+.app{
+min-height:100vh;
+padding:8px 10px 25px;
+background:linear-gradient(145deg,#012c18,#00652f,#01351d)
+}
+
+.container{
+width:100%;
+max-width:850px;
+margin:auto
+}
+
+.tabs{
+display:flex;
+justify-content:center;
+gap:6px;
+margin-bottom:6px;
+overflow-x:auto
+}
+
+.tabs button{
+border:1px solid rgba(255,255,255,.5);
+background:rgba(255,255,255,.12);
+color:white;
+border-radius:12px;
+padding:8px 15px;
+font-size:12px;
+font-weight:bold;
+white-space:nowrap
+}
+
+.tabs button.active{
+background:#ffd000;
+color:#06351f
+}
+
+.logo{
+width:min(95%,620px);
+margin:auto;
+text-align:center
+}
+
+.logo img{
+width:100%;
+height:auto;
+display:block
+}
+
+.title{
+text-align:center;
+margin:0 0 12px
+}
+
+.title h1{
+margin:0;
+font-size:30px;
+font-weight:900
+}
+
+.title h1 span{
+color:#ffd000
+}
+
+.title p{
+margin:4px 0 0;
+font-size:14px
+}
+
+.screen{
+display:none
+}
+
+.screen.active{
+display:block
+}
+
+.margin-card,
+.calc-card{
+background:white;
+color:#123;
+border-radius:24px;
+padding:16px;
+border:3px solid #15914b
+}
+
+.commercial-tabs{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:5px;
+margin-bottom:12px
+}
+
+.commercial-tabs button{
+border:1px solid #15914b;
+background:#eef8f0;
+color:#075b2c;
+border-radius:10px;
+padding:9px 3px;
+font-size:11px;
+font-weight:bold
+}
+
+.commercial-tabs button.active{
+background:#075b2c;
+color:#fff
+}
+
+.commercial-mode{
+display:none
+}
+
+.commercial-mode.active{
+display:block
+}
+
+.field{
+margin-bottom:12px
+}
+
+.field label{
+display:block;
+margin-bottom:6px;
+color:#075b2c;
+font-size:14px;
+font-weight:bold
+}
+
+.input-box{
+display:flex;
+height:52px;
+border:2px solid #15914b;
+border-radius:13px;
+overflow:hidden;
+background:white
+}
+
+.input-box span{
+display:flex;
+align-items:center;
+padding:0 14px;
+background:#075b2c;
+color:white;
+font-weight:bold
+}
+
+.input-box input{
+width:100%;
+border:0;
+outline:0;
+font-size:20px;
+padding:0 12px;
+color:#123
+}
+
+.results{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:7px
+}
+
+.result{
+background:#f7faf8;
+border-radius:16px;
+padding:11px 8px;
+text-align:center;
+border:1px solid #d8e6dc
+}
+
+.result h3{
+margin:0;
+color:#138a46;
+font-size:12px
+}
+
+.result .value{
+margin-top:5px;
+color:#075b2c;
+font-size:21px;
+font-weight:900
+}
+
+.result p{
+margin:3px 0 0;
+color:#68756f;
+font-size:10px
+}
+
+.formulas{
+margin-top:10px;
+padding:10px;
+border-radius:15px;
+background:#eef8f0;
+color:#194c2d;
+text-align:center;
+font-size:11px;
+line-height:1.5
+}
+
+.formulas strong{
+color:#075b2c;
+font-size:13px
+}
+
+.clear-margin{
+width:100%;
+height:48px;
+margin-top:10px;
+border:0;
+border-radius:14px;
+background:#075b2c;
+color:white;
+font-size:15px;
+font-weight:bold
+}
+
+.calc-card{
+padding:12px
+}
+
+.memory{
+display:grid;
+grid-template-columns:repeat(5,1fr)
+}
+
+.memory button{
+height:32px;
+border:0;
+background:transparent;
+color:#075b2c;
+font-size:12px;
+font-weight:bold
+}
+
+.display{
+min-height:130px;
+padding:10px 15px;
+background:#06351f;
+border-radius:18px;
+display:flex;
+flex-direction:column;
+justify-content:flex-end;
+text-align:right;
+overflow:hidden
+}
+
+.expression{
+min-height:34px;
+color:#aebbb4;
+font-size:clamp(17px,4vw,25px);
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis
+}
+
+.result-display{
+color:white;
+font-size:clamp(42px,11vw,64px);
+line-height:1.05;
+font-weight:900;
+white-space:nowrap;
+overflow:hidden;
+text-overflow:ellipsis
+}
+
+.keys{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:2px;
+margin-top:2px
+}
+
+.keys button{
+height:65px;
+border:0;
+border-radius:50%;
+background:transparent;
+color:#075b2c;
+font-size:26px;
+font-weight:500
+}
+
+.keys button:active{
+background:rgba(21,145,75,.13);
+transform:scale(.92)
+}
+
+.keys .operator{
+color:#15914b;
+font-size:30px
+}
+
+.keys .clear{
+color:#df423c
+}
+
+.keys .equal{
+width:78px;
+height:78px;
+justify-self:center;
+align-self:center;
+border-radius:50%;
+background:#21c94b;
+color:white;
+font-size:35px;
+font-weight:bold
+}
+
+.install{
+width:100%;
+height:53px;
+margin-top:12px;
+border:0;
+border-radius:15px;
+background:#15914b;
+color:white;
+font-size:15px;
+font-weight:bold
+}
+
+.footer{
+text-align:center;
+padding:18px 0 0;
+font-size:14px
+}
+
+.footer strong{
+display:block;
+margin-top:2px;
+font-size:21px
+}
+
+@media(max-width:600px){
+
+.app{
+padding:6px 8px 20px
+}
+
+.logo{
+width:100%
+}
+
+.title h1{
+font-size:27px
+}
+
+.title p{
+font-size:13px
+}
+
+.commercial-tabs button{
+font-size:10px;
+padding:8px 2px
+}
+
+.keys button{
+height:60px;
+font-size:24px
+}
+
+.keys .equal{
+width:72px;
+height:72px;
+font-size:32px
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="container">
+
+<div class="tabs">
+<button id="marginTab" class="active">COMERCIAL</button>
+<button id="calcTab">CALCULADORA</button>
+</div>
+
+<div class="logo">
+<img src="./logo-dialli.png" alt="Dialli Distribuidora">
+</div>
+
+<div class="title">
+<h1>CALCULADORA <span>DIALLI</span></h1>
+<p>Calculadora completa para contas rápidas do dia a dia.</p>
+</div>
+
+
+<!-- =========================
+     ÁREA COMERCIAL
+========================= -->
+
+<section id="marginScreen" class="screen active">
+
+<div class="margin-card">
+
+<div class="commercial-tabs">
+
+<button class="commercialTab active" data-mode="margem">
+MARGEM
+</button>
+
+<button class="commercialTab" data-mode="preco">
+PREÇO
+</button>
+
+<button class="commercialTab" data-mode="desconto">
+DESCONTO
+</button>
+
+<button class="commercialTab" data-mode="markup">
+MARKUP
+</button>
+
+</div>
+
+
+<!-- MARGEM -->
+
+<div id="mode-margem" class="commercial-mode active">
+
+<div class="field">
+
+<label>CUSTO DO PRODUTO</label>
+
+<div class="input-box">
+
+<span>R$</span>
+
+<input
+id="margemCusto"
+inputmode="decimal"
+autocomplete="off"
+value="0"
+>
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>MARGEM DESEJADA (%)</label>
+
+<div class="input-box">
+
+<span>%</span>
+
+<input
+id="margemPercent"
+inputmode="decimal"
+autocomplete="off"
+value="0"
+>
+
+</div>
+
+</div>
+
+
+<div class="results">
+
+<div class="result">
+
+<h3>PREÇO DE VENDA</h3>
+
+<div id="margemVenda" class="value">
+R$ 0,00
+</div>
+
+<p>Preço sugerido</p>
+
+</div>
+
+
+<div class="result">
+
+<h3>LUCRO</h3>
+
+<div id="margemLucro" class="value">
+R$ 0,00
+</div>
+
+<p>Venda − custo</p>
+
+</div>
+
+
+<div class="result">
+
+<h3>MARGEM</h3>
+
+<div id="margemReal" class="value">
+0,00%
+</div>
+
+<p>Margem obtida</p>
+
+</div>
+
+
+<div class="result">
+
+<h3>MARKUP</h3>
+
+<div id="margemMarkup" class="value">
+0,00x
+</div>
+
+<p>Venda ÷ custo</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PREÇO -->
+
+<div id="mode-preco" class="commercial-mode">
+
+<div class="field">
+
+<label>CUSTO DO PRODUTO</label>
+
+<div class="input-box">
+
+<span>R$</span>
+
+<input
+id="precoCusto"
+inputmode="decimal"
+value="0"
+>
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>PREÇO DE VENDA</label>
+
+<div class="input-box">
+
+<span>R$</span>
+
+<input
+id="precoVenda"
+inputmode="decimal"
+value="0"
+>
+
+</div>
+
+</div>
+
+
+<div class="results">
+
+<div class="result">
+
+<h3>MARGEM OBTIDA</h3>
+
+<div id="precoMargem" class="value">
+0,00%
+</div>
+
+<p>Lucro ÷ venda</p>
+
+</div>
+
+
+<div class="result">
+
+<h3>LUCRO</h3>
+
+<div id="precoLucro" class="value">
+R$ 0,00
+</div>
+
+<p>Venda − custo</p>
+
+</div>
+
+
+<div class="result">
+
+<h3>PREÇO</h3>
+
+<div id="precoResultado" class="value">
+R$ 0,00
+</div>
+
+<p>Preço informado</p>
+
+</div>
+
+
+<div class="result">
+
+<h3>MARKUP</h3>
+
+<div id="precoMarkup" class="value">
+0,00x
+</div>
+
+<p>Venda ÷ custo</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- DESCONTO -->
+
+<div id="mode-desconto" class="commercial-mode">
+
+<div class="field">
+
+<label>PREÇO ORIGINAL</label>
+
+<div class="input-box">
+
+<span>R$</span>
+
+<input
+id="descPreco"
+inputmode="decimal"
+value="0"
+>
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>DESCONTO (%)</label>
+
+<div class="input-box">
+
+<span>%</span>
+
+<input
+id="descPercent"
+inputmode="decimal"
+value="0"
+>
+
+</div>
+
+</div>
+
+
+<div class="results">
+
+<div class="result">
+
+<h3>PREÇO FINAL</h3>
+
+<div id="descFinal" class="value">
+R$ 0,00
+</div>
+
+<p>Após desconto</p>
+
+</div>
+
+
+<div class="result">
+
+<h3>DESCONTO</h3>
+
+<div id="descValor" class="value">
+R$ 0,00
+</div>
+
+<p>Valor abatido</p>
+
+</div>
+
+
+<div class="result">
+
+<h3>PERCENTUAL</h3>
+
+<div id="descPercReal" class="value">
+0,00%
+</div>
+
+<p>Desconto aplicado</p>
+
+</div>
+
+
+<div class="result">
+
+<h3>ECONOMIA</h3>
+
+<div id="descEconomia" class="value">
+R$ 0,00
+</div>
+
+<p>Você economiza</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- MARKUP -->
+
+<div id="mode-markup" class="commercial-mode">
+
+<div class="field">
+
+<label>CUSTO DO PRODUTO</label>
+
+<div class="input-box">
+
+<span>R$</span>
+
+<input
+id="markupCusto"
+inputmode="decimal"
+value="0"
+>
+
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>MARKUP (%)</label>
+
+<div class="input-box">
+
+<span>%</span>
+
+<input
+id="markupPercent"
+inputmode="decimal"
+value="0"
+>
+
+</div>
+
+</div>
+
+
+<div class="results">
+
+<div class="result">
+
+<h3>PREÇO DE VENDA</h3>
+
+<div id="markupVenda" class="value">
+R$ 0,00
+</div>
+
+<p>Preço calculado</p>
+
+</div>
+
+
+<div class="result">
+
+<h3>LUCRO</h3>
+
+<div id="markupLucro" class="value">
+R$ 0,00
+</div>
+
+<p>Venda − custo</p>
+
+</div>
+
+
+<div class="result">
+
+<h3>MARKUP</h3>
+
+<div id="markupReal" class="value">
+0,00%
+</div>
+
+<p>Percentual aplicado</p>
+
+</div>
+
+
+<div class="result">
+
+<h3>FATOR</h3>
+
+<div id="markupFator" class="value">
+1,00x
+</div>
+
+<p>Fator de multiplicação</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="formulas">
+
+<strong>FUNÇÕES COMERCIAIS DIALLI</strong>
+
+<br>
+
+Margem: Custo ÷ (1 − margem/100)
+
+&nbsp; • &nbsp;
+
+Markup: Custo × (1 + markup/100)
+
+<br>
+
+Desconto: Preço − (Preço × desconto/100)
+
+</div>
+
+
+<button id="clearMargin" class="clear-margin">
+
+↻ &nbsp; LIMPAR TUDO
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     CALCULADORA
+========================= -->
+
+<section id="calcScreen" class="screen">
+
+<div class="calc-card">
+
+<div class="memory">
+
+<button data-memory="MC">MC</button>
+
+<button data-memory="MR">MR</button>
+
+<button data-memory="M+">M+</button>
+
+<button data-memory="M-">M−</button>
+
+<button data-memory="MS">MS</button>
+
+</div>
+
+
+<div class="display">
+
+<div id="expression" class="expression"></div>
+
+<div id="display" class="result-display">
+0
+</div>
+
+</div>
+
+
+<div class="keys">
+
+<button
+class="clear"
+data-action="clear">
+AC
+</button>
+
+<button
+data-action="back">
+⌫
+</button>
+
+<button
+data-action="percent">
+%
+</button>
+
+<button
+class="operator"
+data-operator="/">
+÷
+</button>
+
+
+<button data-number="7">7</button>
+
+<button data-number="8">8</button>
+
+<button data-number="9">9</button>
+
+<button
+class="operator"
+data-operator="*">
+×
+</button>
+
+
+<button data-number="4">4</button>
+
+<button data-number="5">5</button>
+
+<button data-number="6">6</button>
+
+<button
+class="operator"
+data-operator="-">
+−
+</button>
+
+
+<button data-number="1">1</button>
+
+<button data-number="2">2</button>
+
+<button data-number="3">3</button>
+
+<button
+class="operator"
+data-operator="+">
++
+</button>
+
+
+<button data-action="sign">
++/−
+</button>
+
+<button data-number="0">
+0
+</button>
+
+<button data-action="decimal">
+,
+</button>
+
+<button
+class="equal"
+data-action="equals">
+=
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<button id="installButton" class="install">
+
+📲 &nbsp; INSTALAR CALCULADORA DIALLI
+
+</button>
+
+
+<div class="footer">
+
+criado e desenvolvido por
+
+<strong>João Siena.</strong>
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+
+/* =================================================
+   FUNÇÕES COMERCIAIS
+================================================= */
+
+function numBR(v){
+
+if(v===null || v===undefined)
+return 0;
+
+let s=String(v).trim();
+
+if(!s)
+return 0;
+
+s=s
+.replace(/\./g,"")
+.replace(",", ".");
+
+const n=Number(s);
+
+return Number.isFinite(n)
+?n
+:0;
+
+}
+
+
+function money(n){
+
+if(!Number.isFinite(n))
+n=0;
+
+return n.toLocaleString(
+"pt-BR",
+{
+style:"currency",
+currency:"BRL",
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}
+);
+
+}
+
+
+function pct(n){
+
+if(!Number.isFinite(n))
+n=0;
+
+return n.toLocaleString(
+"pt-BR",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}
+)+"%";
+
+}
+
+
+function factor(n){
+
+if(!Number.isFinite(n))
+n=0;
+
+return n.toLocaleString(
+"pt-BR",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+}
+)+"x";
+
+}
+
+
+/* CÁLCULOS COMERCIAIS */
+
+function calcCommercial(){
+
+/* MARGEM */
+
+const custo=
+numBR(
+document
+.getElementById("margemCusto")
+.value
+);
+
+const margem=
+numBR(
+document
+.getElementById("margemPercent")
+.value
+);
+
+let venda=0;
+
+if(
+custo>0 &&
+margem>=0 &&
+margem<100
+){
+
+venda=
+custo/
+(1-margem/100);
+
+}
+
+document
+.getElementById("margemVenda")
+.textContent=
+money(venda);
+
+document
+.getElementById("margemLucro")
+.textContent=
+money(venda-custo);
+
+document
+.getElementById("margemReal")
+.textContent=
+pct(margem);
+
+document
+.getElementById("margemMarkup")
+.textContent=
+custo>0
+?factor(venda/custo)
+:"0,00x";
+
+
+/* PREÇO */
+
+const pc=
+numBR(
+document
+.getElementById("precoCusto")
+.value
+);
+
+const pv=
+numBR(
+document
+.getElementById("precoVenda")
+.value
+);
+
+const pl=
+pv-pc;
+
+const pm=
+pv!==0
+?(pl/pv)*100
+:0;
+
+document
+.getElementById("precoMargem")
+.textContent=
+pct(pm);
+
+document
+.getElementById("precoLucro")
+.textContent=
+money(pl);
+
+document
+.getElementById("precoResultado")
+.textContent=
+money(pv);
+
+document
+.getElementById("precoMarkup")
+.textContent=
+pc>0
+?factor(pv/pc)
+:"0,00x";
+
+
+/* DESCONTO */
+
+const dp=
+numBR(
+document
+.getElementById("descPreco")
+.value
+);
+
+const dperc=
+numBR(
+document
+.getElementById("descPercent")
+.value
+);
+
+const dv=
+dp*dperc/100;
+
+const df=
+dp-dv;
+
+document
+.getElementById("descFinal")
+.textContent=
+money(df);
+
+document
+.getElementById("descValor")
+.textContent=
+money(dv);
+
+document
+.getElementById("descPercReal")
+.textContent=
+pct(dperc);
+
+document
+.getElementById("descEconomia")
+.textContent=
+money(dv);
+
+
+/* MARKUP */
+
+const mc=
+numBR(
+document
+.getElementById("markupCusto")
+.value
+);
+
+const mp=
+numBR(
+document
+.getElementById("markupPercent")
+.value
+);
+
+const mv=
+mc*(1+mp/100);
+
+document
+.getElementById("markupVenda")
+.textContent=
+money(mv);
+
+document
+.getElementById("markupLucro")
+.textContent=
+money(mv-mc);
+
+document
+.getElementById("markupReal")
+.textContent=
+pct(mp);
+
+document
+.getElementById("markupFator")
+.textContent=
+factor(1+mp/100);
+
+}
+
+
+/* ABAS COMERCIAIS */
+
+document
+.querySelectorAll(".commercialTab")
+.forEach(btn=>{
+
+btn.onclick=()=>{
+
+document
+.querySelectorAll(".commercialTab")
+.forEach(b=>
+b.classList.remove("active")
+);
+
+document
+.querySelectorAll(".commercial-mode")
+.forEach(s=>
+s.classList.remove("active")
+);
+
+btn.classList.add("active");
+
+document
+.getElementById(
+"mode-"+btn.dataset.mode
+)
+.classList.add("active");
+
+};
+
+});
+
+
+document
+.querySelectorAll(".commercial-mode input")
+.forEach(input=>{
+
+input.addEventListener(
+"input",
+calcCommercial
+);
+
+});
+
+
+document
+.getElementById("clearMargin")
+.onclick=()=>{
+
+document
+.querySelectorAll(".commercial-mode input")
+.forEach(i=>
+i.value="0"
+);
+
+calcCommercial();
+
+};
+
+
+/* =================================================
+   CALCULADORA SIENA PRO
+================================================= */
+
+let calcValue="0";
+
+let calcStored=null;
+
+let calcOp=null;
+
+let calcWaiting=false;
+
+let calcExpression="";
+
+let calcLastValue=null;
+
+let memory=0;
+
+
+const display=
+document.getElementById("display");
+
+const expression=
+document.getElementById("expression");
+
+
+function formatCalc(value){
+
+if(value==="Erro")
+return "Erro";
+
+const number=
+Number(value);
+
+if(!Number.isFinite(number))
+return "Erro";
+
+return number.toLocaleString(
+"pt-BR",
+{
+maximumFractionDigits:10,
+useGrouping:true
+}
+);
+
+}
+
+
+function updateCalc(){
+
+display.textContent=
+formatCalc(calcValue);
+
+expression.textContent=
+calcExpression;
+
+}
+
+
+/* DIGITOS */
+
+function calcDigit(digit){
+
+if(calcValue==="Erro")
+calcClear();
+
+if(calcWaiting){
+
+calcValue=digit;
+
+calcWaiting=false;
+
+}
+
+else{
+
+if(calcValue==="0"){
+
+calcValue=digit;
+
+}
+
+else{
+
+const digits=
+calcValue
+.replace(/[^\d]/g,"");
+
+if(digits.length>=15)
+return;
+
+calcValue+=digit;
+
+}
+
+}
+
+updateCalc();
+
+}
+
+
+/* DECIMAL */
+
+function calcDecimal(){
+
+if(calcValue==="Erro")
+calcClear();
+
+if(calcWaiting){
+
+calcValue="0.";
+
+calcWaiting=false;
+
+}
+
+else if(
+!calcValue.includes(".")
+){
+
+calcValue+=".";
+
+}
+
+updateCalc();
+
+}
+
+
+/* OPERADOR */
+
+function operatorSymbol(op){
+
+if(op==="+")
+return "+";
+
+if(op==="-")
+return "−";
+
+if(op==="*")
+return "×";
+
+if(op==="/")
+return "÷";
+
+return "";
+
+}
+
+
+function doOperation(a,b,op){
+
+if(op==="+")
+return a+b;
+
+if(op==="-")
+return a-b;
+
+if(op==="*")
+return a*b;
+
+if(op==="/"){
+
+if(b===0)
+return NaN;
+
+return a/b;
+
+}
+
+return b;
+
+}
+
+
+function calcOperator(op){
+
+if(calcValue==="Erro")
+return;
+
+const current=
+Number(calcValue);
+
+if(!Number.isFinite(current))
+return;
+
+
+if(calcStored===null){
+
+calcStored=current;
+
+}
+
+else if(
+calcOp!==null &&
+!calcWaiting
+){
+
+const result=
+doOperation(
+calcStored,
+current,
+calcOp
+);
+
+if(!Number.isFinite(result)){
+
+calcValue="Erro";
+
+calcStored=null;
+
+calcOp=null;
+
+calcExpression="";
+
+calcWaiting=true;
+
+updateCalc();
+
+return;
+
+}
+
+calcStored=result;
+
+calcValue=
+String(result);
+
+}
+
+
+calcOp=op;
+
+calcWaiting=true;
+
+calcLastValue=null;
+
+calcExpression=
+formatCalc(calcStored)
++" "
++operatorSymbol(op);
+
+updateCalc();
+
+}
+
+
+/* IGUAL */
+
+function calcEqual(){
+
+if(
+calcStored===null ||
+calcOp===null
+)
+return;
+
+let current=
+Number(calcValue);
+
+if(calcLastValue!==null){
+
+current=
+calcLastValue;
+
+}
+
+
+const result=
+doOperation(
+calcStored,
+current,
+calcOp
+);
+
+
+if(!Number.isFinite(result)){
+
+calcValue="Erro";
+
+calcStored=null;
+
+calcOp=null;
+
+calcExpression="";
+
+calcWaiting=true;
+
+updateCalc();
+
+return;
+
+}
+
+
+calcExpression=
+formatCalc(calcStored)
++" "
++operatorSymbol(calcOp)
++" "
++formatCalc(current)
++" =";
+
+
+calcValue=
+String(result);
+
+calcStored=null;
+
+calcOp=null;
+
+calcWaiting=true;
+
+calcLastValue=
+current;
+
+updateCalc();
+
+}
+
+
+/* PORCENTAGEM */
+
+function calcPercent(){
+
+let value=
+Number(calcValue);
+
+if(!Number.isFinite(value))
+return;
+
+
+if(
+calcStored!==null &&
+calcOp!==null
+){
+
+if(
+calcOp==="+" ||
+calcOp==="-"
+){
+
+value=
+calcStored*
+value/100;
+
+}
+
+else{
+
+value=
+value/100;
+
+}
+
+}
+
+else{
+
+value=
+value/100;
+
+}
+
+
+calcValue=
+String(value);
+
+calcLastValue=
+value;
+
+calcWaiting=false;
+
+updateCalc();
+
+}
+
+
+/* BACKSPACE */
+
+function calcBack(){
+
+if(calcValue==="Erro"){
+
+calcClear();
+
+return;
+
+}
+
+
+if(
+calcValue.length<=1 ||
+(
+calcValue.length===2 &&
+calcValue.startsWith("-")
+)
+){
+
+calcValue="0";
+
+}
+
+else{
+
+calcValue=
+calcValue.slice(0,-1);
+
+}
+
+updateCalc();
+
+}
+
+
+/* AC */
+
+function calcClear(){
+
+calcValue="0";
+
+calcStored=null;
+
+calcOp=null;
+
+calcWaiting=false;
+
+calcExpression="";
+
+calcLastValue=null;
+
+updateCalc();
+
+}
+
+
+/* SINAL */
+
+function calcSign(){
+
+if(calcValue==="0")
+return;
+
+if(
+calcValue.startsWith("-")
+){
+
+calcValue=
+calcValue.slice(1);
+
+}
+
+else{
+
+calcValue=
+"-"+calcValue;
+
+}
+
+updateCalc();
+
+}
+
+
+/* BOTÕES */
+
+document
+.querySelectorAll("[data-number]")
+.forEach(button=>{
+
+button.onclick=()=>{
+
+calcDigit(
+button.dataset.number
+);
+
+};
+
+});
+
+
+document
+.querySelectorAll("[data-operator]")
+.forEach(button=>{
+
+button.onclick=()=>{
+
+calcOperator(
+button.dataset.operator
+);
+
+};
+
+});
+
+
+document
+.querySelectorAll("[data-action]")
+.forEach(button=>{
+
+button.onclick=()=>{
+
+const action=
+button.dataset.action;
+
+if(action==="clear")
+calcClear();
+
+if(action==="back")
+calcBack();
+
+if(action==="decimal")
+calcDecimal();
+
+if(action==="equals")
+calcEqual();
+
+if(action==="percent")
+calcPercent();
+
+if(action==="sign")
+calcSign();
+
+};
+
+});
+
+
+/* MEMÓRIA */
+
+document
+.querySelectorAll("[data-memory]")
+.forEach(button=>{
+
+button.onclick=()=>{
+
+const action=
+button.dataset.memory;
+
+const value=
+Number(calcValue);
+
+
+if(action==="MC")
+memory=0;
+
+
+if(action==="MR"){
+
+calcValue=
+String(memory);
+
+calcWaiting=false;
+
+}
+
+
+if(
+action==="MS" &&
+Number.isFinite(value)
+){
+
+memory=value;
+
+}
+
+
+if(
+action==="M+" &&
+Number.isFinite(value)
+){
+
+memory+=value;
+
+}
+
+
+if(
+action==="M-" &&
+Number.isFinite(value)
+){
+
+memory-=value;
+
+}
+
+
+updateCalc();
+
+};
+
+});
+
+
+/* TECLADO FÍSICO */
+
+document.addEventListener(
+"keydown",
+event=>{
+
+if(
+event.key>="0" &&
+event.key<="9"
+){
+
+calcDigit(event.key);
+
+return;
+
+}
+
+
+if(
+["+","-","*","/"]
+.includes(event.key)
+){
+
+calcOperator(event.key);
+
+return;
+
+}
+
+
+if(
+event.key==="." ||
+event.key===","
+){
+
+calcDecimal();
+
+return;
+
+}
+
+
+if(
+event.key==="Enter" ||
+event.key==="="
+){
+
+event.preventDefault();
+
+calcEqual();
+
+return;
+
+}
+
+
+if(
+event.key==="Backspace"
+){
+
+calcBack();
+
+return;
+
+}
+
+
+if(
+event.key==="Escape" ||
+event.key==="Delete"
+){
+
+calcClear();
+
+return;
+
+}
+
+
+if(event.key==="%"){
+
+calcPercent();
+
+}
+
+});
+
+
+/* =================================================
+   ABAS PRINCIPAIS
+================================================= */
+
+const marginTab=
+document.getElementById("marginTab");
+
+const calcTab=
+document.getElementById("calcTab");
+
+const marginScreen=
+document.getElementById("marginScreen");
+
+const calcScreen=
+document.getElementById("calcScreen");
+
+
+marginTab.onclick=()=>{
+
+marginTab.classList.add("active");
+
+calcTab.classList.remove("active");
+
+marginScreen.classList.add("active");
+
+calcScreen.classList.remove("active");
+
+};
+
+
+calcTab.onclick=()=>{
+
+calcTab.classList.add("active");
+
+marginTab.classList.remove("active");
+
+calcScreen.classList.add("active");
+
+marginScreen.classList.remove("active");
+
+};
+
+
+/* =================================================
+   INSTALAÇÃO
+================================================= */
+
+let deferredPrompt=null;
+
+
+window.addEventListener(
+"beforeinstallprompt",
+event=>{
+
+event.preventDefault();
+
+deferredPrompt=event;
+
+});
+
+
+document
+.getElementById("installButton")
+.onclick=async()=>{
+
+if(deferredPrompt){
+
+deferredPrompt.prompt();
+
+await deferredPrompt.userChoice;
+
+deferredPrompt=null;
+
+return;
+
+}
+
+
+if(
+/iPhone|iPad|iPod/i
+.test(navigator.userAgent)
+){
+
+alert(
+"Para instalar no iPhone:\n\n"+
+"1. Toque em Compartilhar.\n"+
+"2. Toque em Adicionar à Tela de Início.\n"+
+"3. Toque em Adicionar."
+);
+
+}
+
+else{
+
+alert(
+"No Android, abra pelo Google Chrome e toque em "+
+"Instalar aplicativo ou Adicionar à tela inicial."
+);
+
+}
+
+};
+
+
+/* =================================================
+   OFFLINE
+================================================= */
+
+if("serviceWorker" in navigator){
+
+window.addEventListener(
+"load",
+()=>{
+
+navigator.serviceWorker
+.register("./sw.js")
+.catch(
+error=>console.log(error)
+);
+
+});
+
+}
+
+
+/* INICIALIZAÇÃO */
+
+calcCommercial();
+
+calcClear();
+
+</script>
+
+</body>
+</html>
+ 
